@@ -1,0 +1,19 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 27.02.2012 17:06:57
+
+newmtl Polo_Ball
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 1.0000 1.0000 1.0000
+	Kd 1.0000 1.0000 1.0000
+	Ks 0.2700 0.2700 0.2700
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Polo_Ball_diffuse.jpg
+	map_Kd Polo_Ball_diffuse.jpg
+	map_bump Polo_Ball_bump.jpg
+	bump Polo_Ball_bump.jpg
+	map_refl Map__5_Raytrace.tga

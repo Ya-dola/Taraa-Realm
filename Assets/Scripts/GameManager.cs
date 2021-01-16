@@ -45,9 +45,16 @@ public class GameManager : MonoBehaviour
     public float camRotXEnd;
     public float camFovStart;
     public float camFovEnd;
+    public float camPosTransitionSpeed;
+    public float camRotTransitionSpeed;
     public float camFovTransitionSpeed;
-    private bool camStartTransition;
-    private Vector3 cameraPosition;
+    public float camPosRotAcceptableRange;
+    private bool camStartPosTransition;
+    private bool camPosTransitionDone;
+    private bool camStartRotTransition;
+    private bool camRotTransitionDone;
+    private bool camStartFovTransition;
+    private bool camFovTransitionDone;
 
     [Header("Realm")]
     public float topBotZEdgePos;
@@ -103,9 +110,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Setting Default Values
-        camStartTransition = false;
+        camStartFovTransition = false;
+        camStartPosTransition = false;
+        camStartRotTransition = false;
+        camPosTransitionDone = false;
+        camFovTransitionDone = false;
+        camRotTransitionDone = false;
         sceneCounter = 0;
-        cameraPosition = Camera.main.transform.position;
         cameraShakeAmountStep = cameraShakeAmount / cameraShakeStepFactor;
         cameraShakeDurationStep = cameraShakeDuration / cameraShakeStepFactor;
 
@@ -120,10 +131,9 @@ public class GameManager : MonoBehaviour
                             "Game Started: " + GameStarted + "\n" +
                             "Game Ended: " + GameEnded + "\n" +
                             "Game Paused: " + GamePaused + "\n" +
-                            // "Player Disc Caught: " + PlayerDiscCaught + "\n" +
-                            // "Player Reposition Disc: " + PlayerRepositionDisc + "\n" +
-                            // "Disc Collided Once: " + DiscCollidedOnce + "\n" +
-                            // "Enemy Disc Caught: " + EnemyDiscCaught + "\n" +
+                            // "camStartPosTransition: " + camStartPosTransition + "\n" +
+                            // "camStartFovTransition: " + camStartFovTransition + "\n" +
+                            "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
                             "Time Scale: " + Time.timeScale + "\n"
                             // "Enemy Reposition Disc: " + EnemyRepositionDisc + "\n" +
                             // "Enemy State: " + enemyState + "\n" +
@@ -136,20 +146,13 @@ public class GameManager : MonoBehaviour
                             // "Current Scene Int: " + currentSceneInt + "\n" +
                             ;
 
-        // Camera Transition before Starting the Game
-        if (camStartTransition)
-        {
-            if (Camera.main.fieldOfView > camFovEnd)
-                Camera.main.fieldOfView -= camFovTransitionSpeed * Time.fixedDeltaTime;
-            else
-            {
-                Camera.main.fieldOfView = camFovEnd;
-                camStartTransition = false;
+        if (Input.GetMouseButton(0))
+            // Signals the Game has started and only runs it once if the game has already started
+            if (!GameManager.singleton.GameStarted)
+                GameManager.singleton.StartCameraTransitions();
 
-                // Starting the Game if the Camera has transitioned to zoomed in FOV
-                StartGame();
-            }
-        }
+        // To perform the camera transitions
+        PerformCameraTransitions();
 
         // To Update the level indicator text with the corresponding level
         // levelText.text = "Level " + sceneCounter;
@@ -254,14 +257,72 @@ public class GameManager : MonoBehaviour
 
     // Effects
 
-    public void StartCameraTransition()
+    private void StartCameraTransitions()
     {
-        // Camera Transition before Starting the Game
+        // Camera FOV Transition before Starting the Game
         if (Camera.main.fieldOfView == camFovStart)
-            camStartTransition = true;
+            camStartFovTransition = true;
 
-        // Starting the Game if the Camera has transitioned to zoomed in FOV
-        if (Camera.main.fieldOfView == camFovEnd)
+        // Camera POS Transition before Starting the Game
+        if (Camera.main.transform.position == camPosStart)
+            camStartPosTransition = true;
+
+        // Camera ROT Transition before Starting the Game
+        if (Camera.main.transform.rotation.eulerAngles.x == camRotXStart)
+            camStartRotTransition = true;
+
+        // Starting the Game if the Camera has transitioned already
+        if (camFovTransitionDone && camPosTransitionDone && camRotTransitionDone)
+            if (!GameStarted)
+                StartGame();
+    }
+
+    private void PerformCameraTransitions()
+    {
+        // Camera FOV Transition before Starting the Game
+        if (camStartFovTransition)
+        {
+            if (Camera.main.fieldOfView > camFovEnd)
+                Camera.main.fieldOfView -= camFovTransitionSpeed * Time.fixedDeltaTime;
+            else
+            {
+                Camera.main.fieldOfView = camFovEnd;
+                camStartFovTransition = false;
+                camFovTransitionDone = true;
+            }
+        }
+
+        // Camera POS Transition before Starting the Game
+        if (camStartPosTransition)
+        {
+            // To reposition the Disc behind the Player when Caught
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position,
+                                                          camPosEnd,
+                                                          camPosTransitionSpeed * Time.fixedDeltaTime);
+
+            if (Vector3.Distance(Camera.main.transform.position, camPosEnd) < camPosRotAcceptableRange)
+            {
+                camStartPosTransition = false;
+                camPosTransitionDone = true;
+            }
+        }
+
+        // Camera ROT Transition before Starting the Game
+        if (camStartRotTransition)
+        {
+            // To reposition the Disc behind the Player when Caught
+            Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation,
+                                                              Quaternion.Euler(camRotXEnd, 0, 0),
+                                                              camRotTransitionSpeed * Time.fixedDeltaTime);
+
+            if (Camera.main.transform.rotation.eulerAngles.x - camRotXEnd < camPosRotAcceptableRange)
+            {
+                camStartRotTransition = false;
+                camRotTransitionDone = true;
+            }
+        }
+
+        if (camFovTransitionDone && camPosTransitionDone && camRotTransitionDone)
             if (!GameStarted)
                 StartGame();
     }
@@ -278,7 +339,7 @@ public class GameManager : MonoBehaviour
     {
         while (camShakeDuration > 0)
         {
-            Camera.main.transform.position = cameraPosition + (Random.insideUnitSphere * camShakeAmt);
+            Camera.main.transform.position = camPosEnd + (Random.insideUnitSphere * camShakeAmt);
 
             camShakeDuration -= cameraShakeDurationStep;
             camShakeAmt -= cameraShakeAmountStep;
@@ -287,6 +348,6 @@ public class GameManager : MonoBehaviour
         }
 
         // To reset the Camera Position after Shaking the Camera
-        Camera.main.transform.position = cameraPosition;
+        Camera.main.transform.position = camPosEnd;
     }
 }

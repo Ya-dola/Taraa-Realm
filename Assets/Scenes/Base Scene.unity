@@ -3179,7 +3179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &204210690
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5995,6 +5995,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f2ca0570d3fca4584d7de3ad28cdde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStartingPos: {x: 0, y: 1, z: 0}
+  thrwPrefabs: []
+  thrwSpeed: 20
+  thrwBrokenPrefabs: []
+  thrwBrokenDelay: 2
+  thrwExplosionForce: 350
+  thrwExplosionRadius: 6
+  thrwExplosionUpwardsMod: 4
+  thrwBrokenSound: {fileID: 0}
+  thrwBrokenSoundVolume: 0.125
+  thrwTrailPrefab: {fileID: 7887986001787867717, guid: ee3dbc5f7cd2c8540b18b98ea43ffa45, type: 3}
+  cameraShakeAmount: 0.125
+  cameraShakeDuration: 0.0625
+  cameraShakeStepFactor: 60
+  camPosStart: {x: 0.5, y: 25, z: -7}
+  camPosEnd: {x: 0.5, y: 25, z: -12.5}
+  camRotXStart: 76
+  camRotXEnd: 68
+  camFovStart: 60
+  camFovEnd: 57
+  camFovTransitionSpeed: 8
+  topBotZEdgePos: 10
+  rightSideXEdgePos: 6
+  leftSideXEdgePos: -5
+  playerMaterial: {fileID: 0}
+  playerEffectsMaterial: {fileID: 0}
+  enemyMaterials: []
+  enemyEffectsMaterials: []
+  tapToStyleTMP: {fileID: 1068649442500068805}
+  levelText: {fileID: 1068649443888799678}
+  pauseMenu: {fileID: 7044814638119602206}
+  gameWonMenu: {fileID: 0}
+  gameLostMenu: {fileID: 5994262119904839876}
+  pauseButton: {fileID: 204210689}
+  controlButtons: {fileID: 1719198893}
+  debugText: {fileID: 1068649444401521830}
 --- !u!4 &401093375
 Transform:
   m_ObjectHideFlags: 0
@@ -15513,7 +15549,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 57
+  field of view: 64
   orthographic: 0
   orthographic size: 15
   m_Depth: -1
@@ -15538,13 +15574,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5591929, y: 0, z: 0, w: 0.8290376}
-  m_LocalPosition: {x: 0.5, y: 25, z: -12.5}
+  m_LocalRotation: {x: 0.61566144, y: 0, z: 0, w: 0.7880108}
+  m_LocalPosition: {x: 0.5, y: 25, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 68, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 76, y: 0, z: 0}
 --- !u!1 &976824434
 GameObject:
   m_ObjectHideFlags: 0
@@ -25785,7 +25821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1719198894
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32125,7 +32161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 120}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 380, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1068649442500068805
@@ -32141,12 +32177,12 @@ GameObject:
   - component: {fileID: 1068649442500068803}
   - component: {fileID: 1068649442500068801}
   m_Layer: 0
-  m_Name: Tap To Move TMP
+  m_Name: Tap To Style TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1068649442557021340
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32771,7 +32807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1068649443888799677
 CanvasRenderer:
   m_ObjectHideFlags: 0

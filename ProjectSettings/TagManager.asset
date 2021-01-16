@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Throwable
+  - Edge
   layers:
   - Default
   - TransparentFX

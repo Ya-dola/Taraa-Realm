@@ -102,7 +102,15 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Setting Default Values
+        camStartTransition = false;
+        sceneCounter = 0;
+        cameraPosition = Camera.main.transform.position;
+        cameraShakeAmountStep = cameraShakeAmount / cameraShakeStepFactor;
+        cameraShakeDurationStep = cameraShakeDuration / cameraShakeStepFactor;
 
+        // To load the next scene
+        // LoadNextScene();
     }
 
     // Update is called once per frame

@@ -1135,10 +1135,10 @@ MonoBehaviour:
   gameLostMenu: {fileID: 5994262119904839876}
   pauseButton: {fileID: 204210689}
   controlButtons: {fileID: 1719198893}
-  upButton: {fileID: 10654814}
-  downButton: {fileID: 463622240}
-  rightButton: {fileID: 559894575}
-  leftButton: {fileID: 211503439}
+  upButton: {fileID: 10654816}
+  downButton: {fileID: 463622242}
+  rightButton: {fileID: 559894577}
+  leftButton: {fileID: 211503441}
   debugText: {fileID: 1068649444401521830}
 --- !u!4 &401093375
 Transform:
@@ -5116,7 +5116,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: da440ac024c22954496b58270bd4ae94, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5208,7 +5208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068649442416720981}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1068649443506869261}

@@ -96,10 +96,10 @@ public class GameManager : MonoBehaviour
     public GameObject gameLostMenu;
     public GameObject pauseButton;
     public GameObject controlButtons;
-    public GameObject upButton;
-    public GameObject downButton;
-    public GameObject rightButton;
-    public GameObject leftButton;
+    public Button upButton;
+    public Button downButton;
+    public Button rightButton;
+    public Button leftButton;
 
     [Header("Debug")]
     public TextMeshProUGUI debugText;

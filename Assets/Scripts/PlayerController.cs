@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -169,19 +168,19 @@ public class PlayerController : MonoBehaviour
     private void PerformPlayerKeyboardMovement()
     {
         if (Input.GetKeyUp(KeyCode.Keypad8))
-            GameManager.singleton.upButton.GetComponent<Button>().onClick.Invoke();
+            GameManager.singleton.upButton.onClick.Invoke();
         // GameManager.singleton.MovePlayerUp();
 
         if (Input.GetKeyUp(KeyCode.Keypad2))
-            GameManager.singleton.downButton.GetComponent<Button>().onClick.Invoke();
+            GameManager.singleton.downButton.onClick.Invoke();
         // GameManager.singleton.MovePlayerDown();
 
         if (Input.GetKeyUp(KeyCode.Keypad6))
-            GameManager.singleton.rightButton.GetComponent<Button>().onClick.Invoke();
+            GameManager.singleton.rightButton.onClick.Invoke();
         // GameManager.singleton.MovePlayerRight();
 
         if (Input.GetKeyUp(KeyCode.Keypad4))
-            GameManager.singleton.leftButton.GetComponent<Button>().onClick.Invoke();
+            GameManager.singleton.leftButton.onClick.Invoke();
         // GameManager.singleton.MovePlayerLeft();
 
     }

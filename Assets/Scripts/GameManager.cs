@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
             if (!GameManager.singleton.GameStarted)
                 GameManager.singleton.StartCameraTransitions();
 
-        // To perform the camera transitions
+        // To perform the Camera Transitions
         PerformCameraTransitions();
 
         // To Update the level indicator text with the corresponding level
@@ -237,11 +237,12 @@ public class GameManager : MonoBehaviour
     private void UiElementsVisibility()
     {
         // To Hide the Slide to Move Text if not at the Starting Scene
-        if (sceneCounter > 1 || GameStarted)
+        if (sceneCounter > 1 || GameStarted ||
+            camStartFovTransition || camStartPosTransition || camStartRotTransition)
             tapToStyleTMP.SetActive(false);
 
         // To Hide the Control Buttons, Pause Button and Level Indicator Text when the Game is Paused, Won or Lost
-        if (pauseMenu.activeSelf || gameLostMenu.activeSelf || gameWonMenu.activeSelf)
+        if (pauseMenu.activeSelf || gameWonMenu.activeSelf || gameLostMenu.activeSelf)
         {
             controlButtons.SetActive(false);
             pauseButton.SetActive(false);

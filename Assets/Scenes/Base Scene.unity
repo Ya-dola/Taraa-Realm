@@ -218,6 +218,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 401093374}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MovePlayerUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &10654817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,6 +864,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 401093374}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MovePlayerLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &211503442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,6 +1094,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStartingPos: {x: 0, y: 1, z: 0}
+  playerPosMoveSpeed: 4
+  playerPosMoveAcptableRange: 0.01
+  playerRotMoveSpeed: 2
+  playerRotMoveAcptableRange: 0.01
   thrwPrefabs: []
   thrwSpeed: 20
   thrwBrokenPrefabs: []
@@ -1092,10 +1120,10 @@ MonoBehaviour:
   camPosTransitionSpeed: 1.75
   camRotTransitionSpeed: 1.75
   camFovTransitionSpeed: 3
-  camPosRotAcceptableRange: 0.075
-  topBotZEdgePos: 10
-  rightSideXEdgePos: 6
-  leftSideXEdgePos: -5
+  camPosRotAcptableRange: 0.075
+  topBotZEdgePos: 9
+  rightSideXEdgePos: 5
+  leftSideXEdgePos: -4
   playerMaterial: {fileID: 0}
   playerEffectsMaterial: {fileID: 0}
   enemyMaterials: []
@@ -1108,6 +1136,10 @@ MonoBehaviour:
   gameLostMenu: {fileID: 5994262119904839876}
   pauseButton: {fileID: 204210689}
   controlButtons: {fileID: 1719198893}
+  upButton: {fileID: 10654814}
+  downButton: {fileID: 463622240}
+  rightButton: {fileID: 559894575}
+  leftButton: {fileID: 211503439}
   debugText: {fileID: 1068649444401521830}
 --- !u!4 &401093375
 Transform:
@@ -1357,6 +1389,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: da440ac024c22954496b58270bd4ae94, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 401093374}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MovePlayerDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1699,6 +1743,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: da440ac024c22954496b58270bd4ae94, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 401093374}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MovePlayerRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5646,7 +5702,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 31
+  m_AdditionalShaderChannelsFlag: 7
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -6037,7 +6093,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 7
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

@@ -14,7 +14,18 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     public Vector3 playerStartingPos;
-    public GameObject Player { get; set; }
+    [Range(0, 48f)]
+    public float playerPosMoveSpeed;
+    public float playerPosMoveAcptableRange;
+    [Range(0, 48f)]
+    public float playerRotMoveSpeed;
+    public float playerRotMoveAcptableRange;
+    public bool playerMove { get; private set; }
+    public bool playerMoveUp { get; private set; }
+    public bool playerMoveDown { get; private set; }
+    public bool playerMoveRight { get; private set; }
+    public bool playerMoveLeft { get; private set; }
+    public GameObject Player { get; private set; }
 
     [Header("Throwables")]
     public GameObject[] thrwPrefabs;
@@ -48,7 +59,7 @@ public class GameManager : MonoBehaviour
     public float camPosTransitionSpeed;
     public float camRotTransitionSpeed;
     public float camFovTransitionSpeed;
-    public float camPosRotAcceptableRange;
+    public float camPosRotAcptableRange;
     private bool camStartPosTransition;
     private bool camPosTransitionDone;
     private bool camStartRotTransition;
@@ -78,7 +89,7 @@ public class GameManager : MonoBehaviour
     private int currentSceneInt;
     private AsyncOperation sceneLoader;
 
-    [Header("Menus")]
+    [Header("User Interface")]
     public GameObject tapToStyleTMP;
     public TextMeshProUGUI levelText;
     public GameObject pauseMenu;
@@ -86,6 +97,10 @@ public class GameManager : MonoBehaviour
     public GameObject gameLostMenu;
     public GameObject pauseButton;
     public GameObject controlButtons;
+    public GameObject upButton;
+    public GameObject downButton;
+    public GameObject rightButton;
+    public GameObject leftButton;
 
     [Header("Debug")]
     public TextMeshProUGUI debugText;
@@ -129,36 +144,37 @@ public class GameManager : MonoBehaviour
     {
         debugText.text =
                             "Game Started: " + GameStarted + "\n" +
-                            "Game Ended: " + GameEnded + "\n" +
-                            "Game Paused: " + GamePaused + "\n" +
+                            // "Game Ended: " + GameEnded + "\n" +
+                            // "Game Paused: " + GamePaused + "\n" +
                             // "camStartPosTransition: " + camStartPosTransition + "\n" +
                             // "camStartFovTransition: " + camStartFovTransition + "\n" +
-                            "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
-                            "Time Scale: " + Time.timeScale + "\n"
-                            // "Enemy Reposition Disc: " + EnemyRepositionDisc + "\n" +
-                            // "Enemy State: " + enemyState + "\n" +
-                            // "Enemy Dest Size: " + GameObject.FindGameObjectsWithTag("Enemy Dest").Length + "\n" +
-                            // "Enemy Positions Length: " + enemyPositions.Length + "\n" +
-                            // "Enemy Position 0: " + enemyPositions[0].transform.position + "\n" +
+                            // "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
+                            // "Time Scale: " + Time.timeScale + "\n" +
+                            "playerMove: " + playerMove + "\n" +
+                            "playerMoveUp: " + playerMoveUp + "\n" +
+                            "playerMoveDown: " + playerMoveDown + "\n" +
+                            "playerMoveLeft: " + playerMoveLeft + "\n" +
+                            "playerMoveRight: " + playerMoveRight + "\n"
                             // "Scene Counter: " + sceneCounter + "\n" +
                             // "Next Scene Int: " + nextSceneInt + "\n" +
                             // "Temp Next Scene Int: " + tempNextSceneInt + "\n" +
                             // "Current Scene Int: " + currentSceneInt + "\n" +
                             ;
 
-        if (Input.GetMouseButton(0))
+        // To Start the Game when the Screen is Tapped
+        if (Input.GetMouseButton(0) || Input.GetKeyUp(KeyCode.Keypad5))
             // Signals the Game has started and only runs it once if the game has already started
             if (!GameManager.singleton.GameStarted)
-                GameManager.singleton.StartCameraTransitions();
+                GameManager.singleton.CheckCameraTransitions();
 
         // To perform the Camera Transitions
         PerformCameraTransitions();
 
-        // To Update the level indicator text with the corresponding level
-        // levelText.text = "Level " + sceneCounter;
-
         // To Control the Visibility of some UI Elements
         UiElementsVisibility();
+
+        // To Update the level indicator text with the corresponding level
+        levelText.text = "Level " + sceneCounter;
 
         // TODO - To check if the current level has finished
         // if (!GameEnded)
@@ -258,7 +274,7 @@ public class GameManager : MonoBehaviour
 
     // Effects
 
-    private void StartCameraTransitions()
+    private void CheckCameraTransitions()
     {
         // Camera FOV Transition before Starting the Game
         if (Camera.main.fieldOfView == camFovStart)
@@ -301,7 +317,7 @@ public class GameManager : MonoBehaviour
                                                           camPosEnd,
                                                           camPosTransitionSpeed * Time.fixedDeltaTime);
 
-            if (Vector3.Distance(Camera.main.transform.position, camPosEnd) < camPosRotAcceptableRange)
+            if (Vector3.Distance(Camera.main.transform.position, camPosEnd) < camPosRotAcptableRange)
             {
                 camStartPosTransition = false;
                 camPosTransitionDone = true;
@@ -316,7 +332,7 @@ public class GameManager : MonoBehaviour
                                                               Quaternion.Euler(camRotXEnd, 0, 0),
                                                               camRotTransitionSpeed * Time.fixedDeltaTime);
 
-            if (Camera.main.transform.rotation.eulerAngles.x - camRotXEnd < camPosRotAcceptableRange)
+            if (Camera.main.transform.rotation.eulerAngles.x - camRotXEnd < camPosRotAcptableRange)
             {
                 camStartRotTransition = false;
                 camRotTransitionDone = true;
@@ -350,5 +366,58 @@ public class GameManager : MonoBehaviour
 
         // To reset the Camera Position after Shaking the Camera
         Camera.main.transform.position = camPosEnd;
+    }
+
+    // Player Movement
+    public void MovePlayerUp()
+    {
+        SetPlayerMoveUp(true);
+    }
+
+    public void MovePlayerDown()
+    {
+        SetPlayerMoveDown(true);
+    }
+
+    public void MovePlayerRight()
+    {
+        SetPlayerMoveRight(true);
+    }
+
+    public void MovePlayerLeft()
+    {
+        SetPlayerMoveLeft(true);
+    }
+
+    // Setters
+
+    public void SetPlayerMove(bool status)
+    {
+        playerMove = status;
+    }
+
+    public void SetPlayerMoveUp(bool status)
+    {
+        playerMoveUp = status;
+    }
+
+    public void SetPlayerMoveDown(bool status)
+    {
+        playerMoveDown = status;
+    }
+
+    public void SetPlayerMoveRight(bool status)
+    {
+        playerMoveRight = status;
+    }
+
+    public void SetPlayerMoveLeft(bool status)
+    {
+        playerMoveLeft = status;
+    }
+
+    public void SetPlayer(GameObject gameObject)
+    {
+        Player = gameObject;
     }
 }

@@ -82,10 +82,8 @@ public class GameManager : MonoBehaviour
     public Color enemyColor { get; set; }
 
     [Header("Level Management")]
-    public string baseSceneName;
+    public string levelSceneName;
     private int sceneCounter;
-    private int nextSceneInt;
-    private int currentSceneInt;
     private AsyncOperation sceneLoader;
 
     [Header("User Interface")]
@@ -112,6 +110,9 @@ public class GameManager : MonoBehaviour
         else if (singleton != this)
             Destroy(gameObject);
 
+        // To Start Level 1 as the Base Scene Loads
+        SceneManager.LoadScene(levelSceneName, LoadSceneMode.Additive);
+
         // To cap the Unity Game View Frame Rate when Maximized
 #if UNITY_EDITOR
         // VSync must be disabled
@@ -135,7 +136,7 @@ public class GameManager : MonoBehaviour
         cameraShakeDurationStep = cameraShakeDuration / cameraShakeStepFactor;
 
         // To load the next scene
-        // LoadNextScene();
+        LoadNextScene();
     }
 
     // Update is called once per frame
@@ -271,6 +272,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void LoadNextScene()
+    {
+        // To Load the Scene that was loaded in the background
+        if (sceneCounter != 0)
+            sceneLoader.allowSceneActivation = true;
+
+        // To allow the player to play the loaded level/scene
+        GameEnded = false;
+
+        // To Initialise the Game Objects References of Loaded Scene according to their tags
+        InitialiseGameObjectsRef();
+
+        // To Initialise the Game Objects Materials according to their tag
+        // InitialiseGameObjMaterials();
+
+        // To Determine the next scene's number
+        sceneCounter++;
+
+        // To load the next scene in the background
+        BackgroundLoadNextScene();
+    }
+
+    // To load the next scene in the background
+    private void BackgroundLoadNextScene()
+    {
+        sceneLoader = SceneManager.LoadSceneAsync(levelSceneName, LoadSceneMode.Additive);
+        sceneLoader.allowSceneActivation = false;
+    }
+
     // Effects
 
     private void CheckCameraTransitions()
@@ -386,6 +416,17 @@ public class GameManager : MonoBehaviour
     public void MovePlayerLeft()
     {
         SetPlayerMoveLeft(true);
+    }
+
+
+    // Game Play Objects
+    private void InitialiseGameObjectsRef()
+    {
+        // Setting Up the Player
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+            SetPlayer(GameObject.FindGameObjectWithTag("Player"));
+
+        Player.transform.position = playerStartingPos;
     }
 
     // Setters

@@ -1127,7 +1127,7 @@ MonoBehaviour:
   playerEffectsMaterial: {fileID: 0}
   enemyMaterials: []
   enemyEffectsMaterials: []
-  baseSceneName: Level Scene
+  levelSceneName: Level Scene
   tapToStyleTMP: {fileID: 1068649442500068805}
   levelText: {fileID: 1068649443888799678}
   pauseMenu: {fileID: 7044814638119602206}

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerPosOld;
     private Vector3 playerPosLast;
     private Vector3 playerPosMoveTo;
+    private Quaternion playerRotMoveTo;
 
     void Awake()
     {
@@ -36,11 +37,8 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
             return;
 
-        // To Move the Position of the Player
-        PerformPlayerPosMovement();
-
-        // To Move the Rotation of the Player
-        // PerformPlayerRotMovement();
+        // To Move and Rotate the Player
+        PerformPlayerMovement();
 
         // To Move the Player Using Keyboard Keys
         PerformPlayerKeyboardMovement();
@@ -92,52 +90,56 @@ public class PlayerController : MonoBehaviour
         //     playerAnimator.SetBool("CharacterMoving", false);
     }
 
-    // To Move the Position of the Player
-    private void PerformPlayerPosMovement()
+    // To Moveand Rotate the Player
+    private void PerformPlayerMovement()
     {
-        // To Move the Player Up
+        // To Move and Rotate the Player Up
         if (GameManager.singleton.playerMoveUp)
         {
             playerPosLast = transform.position;
-
             playerPosMoveTo = playerPosLast;
             playerPosMoveTo.z += 1;
+
+            playerRotMoveTo = Quaternion.Euler(0, 0, 0);
 
             GameManager.singleton.SetPlayerMoveUp(false);
             GameManager.singleton.SetPlayerMove(true);
         }
 
-        // To Move the Player Down
+        // To Move and Rotate the Player Down
         if (GameManager.singleton.playerMoveDown)
         {
             playerPosLast = transform.position;
-
             playerPosMoveTo = playerPosLast;
             playerPosMoveTo.z -= 1;
+
+            playerRotMoveTo = Quaternion.Euler(0, 180, 0);
 
             GameManager.singleton.SetPlayerMoveDown(false);
             GameManager.singleton.SetPlayerMove(true);
         }
 
-        // To Move the Player Right
+        // To Move and Rotate the Player Right
         if (GameManager.singleton.playerMoveRight)
         {
             playerPosLast = transform.position;
-
             playerPosMoveTo = playerPosLast;
             playerPosMoveTo.x += 1;
+
+            playerRotMoveTo = Quaternion.Euler(0, 90, 0);
 
             GameManager.singleton.SetPlayerMoveRight(false);
             GameManager.singleton.SetPlayerMove(true);
         }
 
-        // To Move the Player Left
+        // To Move and Rotate the Player Left
         if (GameManager.singleton.playerMoveLeft)
         {
             playerPosLast = transform.position;
-
             playerPosMoveTo = playerPosLast;
             playerPosMoveTo.x -= 1;
+
+            playerRotMoveTo = Quaternion.Euler(0, -90, 0);
 
             GameManager.singleton.SetPlayerMoveLeft(false);
             GameManager.singleton.SetPlayerMove(true);
@@ -145,80 +147,21 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.singleton.playerMove)
         {
-            // To reposition the Disc behind the Player when Caught
+            // To move the Player Accordingly to the Button Pressed
             transform.position = Vector3.Lerp(transform.position,
                                               playerPosMoveTo,
                                               GameManager.singleton.playerPosMoveSpeed * Time.fixedDeltaTime);
 
-            if (Vector3.Distance(transform.position, playerPosMoveTo) < GameManager.singleton.playerPosMoveAcptableRange)
-            {
+            // To move the Player Accordingly to the Button Pressed
+            transform.rotation = Quaternion.Slerp(transform.rotation,
+                                                  playerRotMoveTo,
+                                                  GameManager.singleton.playerRotMoveSpeed * Time.fixedDeltaTime);
+
+            if (Vector3.Distance(transform.position, playerPosMoveTo) <
+                                    GameManager.singleton.playerPosRotMoveAcptableRange &&
+                transform.rotation.eulerAngles.y - playerRotMoveTo.eulerAngles.y <
+                                    GameManager.singleton.playerPosRotMoveAcptableRange)
                 GameManager.singleton.SetPlayerMove(false);
-            }
-        }
-    }
-
-    // To Move the Rotation of the Player
-    private void PerformPlayerRotMovement()
-    {
-        // To Move the Player Up
-        if (GameManager.singleton.playerMoveUp)
-        {
-            playerPosLast = transform.position;
-
-            playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.z += 1;
-
-            GameManager.singleton.SetPlayerMoveUp(false);
-            GameManager.singleton.SetPlayerMove(true);
-        }
-
-        // To Move the Player Down
-        if (GameManager.singleton.playerMoveDown)
-        {
-            playerPosLast = transform.position;
-
-            playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.z -= 1;
-
-            GameManager.singleton.SetPlayerMoveDown(false);
-            GameManager.singleton.SetPlayerMove(true);
-        }
-
-        // To Move the Player Right
-        if (GameManager.singleton.playerMoveRight)
-        {
-            playerPosLast = transform.position;
-
-            playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.x += 1;
-
-            GameManager.singleton.SetPlayerMoveRight(false);
-            GameManager.singleton.SetPlayerMove(true);
-        }
-
-        // To Move the Player Left
-        if (GameManager.singleton.playerMoveLeft)
-        {
-            playerPosLast = transform.position;
-
-            playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.x -= 1;
-
-            GameManager.singleton.SetPlayerMoveLeft(false);
-            GameManager.singleton.SetPlayerMove(true);
-        }
-
-        if (GameManager.singleton.playerMove)
-        {
-            // To reposition the Disc behind the Player when Caught
-            transform.position = Vector3.Lerp(transform.position,
-                                              playerPosMoveTo,
-                                              GameManager.singleton.playerRotMoveSpeed * Time.fixedDeltaTime);
-
-            if (Vector3.Distance(transform.position, playerPosMoveTo) < GameManager.singleton.playerRotMoveAcptableRange)
-            {
-                GameManager.singleton.SetPlayerMove(false);
-            }
         }
     }
 

@@ -16,10 +16,9 @@ public class GameManager : MonoBehaviour
     public Vector3 playerStartingPos;
     [Range(0, 48f)]
     public float playerPosMoveSpeed;
-    public float playerPosMoveAcptableRange;
     [Range(0, 48f)]
     public float playerRotMoveSpeed;
-    public float playerRotMoveAcptableRange;
+    public float playerPosRotMoveAcptableRange;
     public bool playerMove { get; private set; }
     public bool playerMoveUp { get; private set; }
     public bool playerMoveDown { get; private set; }

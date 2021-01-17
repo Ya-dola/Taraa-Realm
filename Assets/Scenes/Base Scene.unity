@@ -1097,6 +1097,7 @@ MonoBehaviour:
   playerPosMoveSpeed: 4
   playerRotMoveSpeed: 2
   playerPosRotMoveAcptableRange: 0.01
+  enemyRotMoveSpeed: 1
   thrwPrefabs: []
   thrwSpeed: 20
   thrwBrokenPrefabs: []

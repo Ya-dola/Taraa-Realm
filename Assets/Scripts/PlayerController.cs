@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         //     playerAnimator.SetBool("CharacterMoving", false);
     }
 
-    // To Moveand Rotate the Player
+    // To Move and Rotate the Player
     private void PerformPlayerMovement()
     {
         // To Move and Rotate the Player Up
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
                                               playerPosMoveTo,
                                               GameManager.singleton.playerPosMoveSpeed * Time.fixedDeltaTime);
 
-            // To move the Player Accordingly to the Button Pressed
+            // To rotate the Player Accordingly to the Button Pressed
             transform.rotation = Quaternion.Slerp(transform.rotation,
                                                   playerRotMoveTo,
                                                   GameManager.singleton.playerRotMoveSpeed * Time.fixedDeltaTime);

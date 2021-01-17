@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
     public bool playerMoveLeft { get; private set; }
     public GameObject Player { get; private set; }
 
+    [Header("Enemy")]
+    [Range(0, 48f)]
+    public float enemyRotMoveSpeed;
+
     [Header("Throwables")]
     public GameObject[] thrwPrefabs;
     [Range(0, 48f)]

@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     [Header("Enemy")]
     [Range(0, 48f)]
     public float enemyRotMoveSpeed;
+    public List<GameObject> Enemies { get; private set; }
+    private int enemiesCounter;
 
     [Header("Throwables")]
     public GameObject[] thrwPrefabs;
@@ -81,8 +83,6 @@ public class GameManager : MonoBehaviour
     public Color playerColor { get; set; }
     public Material[] enemyMaterials;
     public Material[] enemyEffectsMaterials;
-    public Material enemyMaterial { get; set; }
-    public Material enemyEffectsMaterial { get; set; }
     public Color enemyColor { get; set; }
 
     [Header("Level Management")]
@@ -135,9 +135,14 @@ public class GameManager : MonoBehaviour
         camPosTransitionDone = false;
         camFovTransitionDone = false;
         camRotTransitionDone = false;
+
         sceneCounter = 0;
+
         cameraShakeAmountStep = cameraShakeAmount / cameraShakeStepFactor;
         cameraShakeDurationStep = cameraShakeDuration / cameraShakeStepFactor;
+
+        Enemies = new List<GameObject>();
+        enemiesCounter = 0;
 
         // To load the next scene
         LoadNextScene();
@@ -289,7 +294,7 @@ public class GameManager : MonoBehaviour
         InitialiseGameObjectsRef();
 
         // To Initialise the Game Objects Materials according to their tag
-        // InitialiseGameObjMaterials();
+        InitialiseGameObjMaterials();
 
         // To Determine the next scene's number
         sceneCounter++;
@@ -422,15 +427,37 @@ public class GameManager : MonoBehaviour
         SetPlayerMoveLeft(true);
     }
 
+    // Enemy Logic
+
+
 
     // Game Play Objects
+
     private void InitialiseGameObjectsRef()
     {
+        // TODO - Check to ensure player is being reset for each level
+        // Player = null;
+        // Enemies.Clear();
+
         // Setting Up the Player
         if (GameObject.FindGameObjectWithTag("Player") != null)
             SetPlayer(GameObject.FindGameObjectWithTag("Player"));
 
         Player.transform.position = playerStartingPos;
+
+        // Setting Up the Enemies
+        foreach (GameObject enemyGo in GameObject.FindGameObjectsWithTag("Enemy"))
+            Enemies.Add(enemyGo);
+    }
+
+    private void InitialiseGameObjMaterials()
+    {
+        // Setting Up the Player Material
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Renderer>().material = playerMaterial;
+
+        // Setting Up the Enemies Materials
+        foreach (GameObject enemyGo in Enemies)
+            enemyGo.GetComponentInChildren<Renderer>().material = enemyMaterials[Random.Range(0, enemyMaterials.Length)];
     }
 
     // Setters

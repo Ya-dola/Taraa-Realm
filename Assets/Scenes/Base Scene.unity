@@ -1124,10 +1124,20 @@ MonoBehaviour:
   topBotZEdgePos: 9
   rightSideXEdgePos: 5
   leftSideXEdgePos: -4
-  playerMaterial: {fileID: 0}
+  playerMaterial: {fileID: 2100000, guid: 3dda6763b6e67604a831f82bf077fbc6, type: 2}
   playerEffectsMaterial: {fileID: 0}
-  enemyMaterials: []
-  enemyEffectsMaterials: []
+  enemyMaterials:
+  - {fileID: 2100000, guid: dfedec611a271b74f9b82f63ee495c36, type: 2}
+  - {fileID: 2100000, guid: e15d3b779ca49df479ffbd6666b8ca87, type: 2}
+  - {fileID: 2100000, guid: 17a768943c242694ba819f56ef07228e, type: 2}
+  - {fileID: 2100000, guid: e8ad2a5f18ea1554486066dc2830fbc1, type: 2}
+  - {fileID: 2100000, guid: 3d17b149e9652124b8946a534beb1163, type: 2}
+  enemyEffectsMaterials:
+  - {fileID: 2100000, guid: f76a2aab7bafe35458c071d16e509082, type: 2}
+  - {fileID: 2100000, guid: ad94d2cab941c1e479350369b8757281, type: 2}
+  - {fileID: 2100000, guid: dbc07afee98bf84448d9b2187a348d16, type: 2}
+  - {fileID: 2100000, guid: 81d539c0a88d6834db6e7774a4cb24dc, type: 2}
+  - {fileID: 2100000, guid: 02a316f2dc8517841bf06c2e6d69dff0, type: 2}
   levelSceneName: Level Scene
   tapToStyleTMP: {fileID: 1068649442500068805}
   levelText: {fileID: 1068649443888799678}

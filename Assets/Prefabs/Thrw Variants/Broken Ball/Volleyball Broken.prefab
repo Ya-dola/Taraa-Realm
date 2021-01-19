@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &915232689927605425
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3328217871640810391, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac93a65f4d73b4041a1cb8e20232cb01, type: 2}
+    - target: {fileID: 765007488626434397, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac93a65f4d73b4041a1cb8e20232cb01, type: 2}
+    - target: {fileID: 919132149155446097, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_Name
+      value: Volleyball Broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_TagString
+      value: Throwable Broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506469940619073489, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac93a65f4d73b4041a1cb8e20232cb01, type: 2}
+    - target: {fileID: 5225005462950423852, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac93a65f4d73b4041a1cb8e20232cb01, type: 2}
+    - target: {fileID: 6040191625045748651, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac93a65f4d73b4041a1cb8e20232cb01, type: 2}
+    - target: {fileID: 8152723051879736898, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac93a65f4d73b4041a1cb8e20232cb01, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b6ed910c74b9bdc469aaa88890842657, type: 3}

@@ -53,11 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 61566139d5c1f844aaa682fa50106e58, type: 3}
       propertyPath: m_Name
-      value: WoodenBall
+      value: WoodenBall Variant
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 61566139d5c1f844aaa682fa50106e58, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 61566139d5c1f844aaa682fa50106e58, type: 3}
+      propertyPath: m_TagString
+      value: Throwable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61566139d5c1f844aaa682fa50106e58, type: 3}

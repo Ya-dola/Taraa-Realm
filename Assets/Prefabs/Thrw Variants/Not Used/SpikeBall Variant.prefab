@@ -53,11 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c455996f6e6b49d418895f41b5216202, type: 3}
       propertyPath: m_Name
-      value: SpikeBall
+      value: SpikeBall Variant
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c455996f6e6b49d418895f41b5216202, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c455996f6e6b49d418895f41b5216202, type: 3}
+      propertyPath: m_TagString
+      value: Throwable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c455996f6e6b49d418895f41b5216202, type: 3}

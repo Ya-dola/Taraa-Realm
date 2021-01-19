@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4a1142b17f64bbc40871f76529421f77, type: 3}
+      propertyPath: m_TagString
+      value: Throwable
+      objectReference: {fileID: 0}
     - target: {fileID: -375142726274063785, guid: 4a1142b17f64bbc40871f76529421f77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -74.99999

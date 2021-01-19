@@ -32,7 +32,20 @@ public class ThrowableController : MonoBehaviour
         // If the throwable collides with the edge
         if (collision.gameObject.tag == "Edge")
         {
+
+            GameObject destEffect = Instantiate(GameManager.singleton.ConfettiPs, transform.position, Quaternion.identity);
+
             Destroy(gameObject);
+
+            Destroy(destEffect, GameManager.singleton.effectPsDestDelay);
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
+            ShakeCamera(GameManager.singleton.cameraShakeDuration, GameManager.singleton.cameraShakeAmount);
         }
     }
 
@@ -64,5 +77,30 @@ public class ThrowableController : MonoBehaviour
 
         if (matIndex != -1)
             gameObject.GetComponentInChildren<TrailRenderer>().material = GameManager.singleton.enemyEffectsMaterials[matIndex];
+    }
+
+    // To Shake the Camera
+    public void ShakeCamera(float camShakeDuration, float camShakeAmt)
+    {
+        // To Stop Any Existing Camera Shakes
+        StopAllCoroutines();
+        StartCoroutine(ShakeCameraIEnum(camShakeDuration, camShakeAmt));
+    }
+
+    private IEnumerator ShakeCameraIEnum(float camShakeDuration, float camShakeAmt)
+    {
+        while (camShakeDuration > 0)
+        {
+            Camera.main.transform.position = GameManager.singleton.camPosEnd +
+                                                (Random.insideUnitSphere * camShakeAmt);
+
+            camShakeDuration -= GameManager.singleton.cameraShakeDurationStep;
+            camShakeAmt -= GameManager.singleton.cameraShakeAmountStep;
+
+            yield return null;
+        }
+
+        // To reset the Camera Position after Shaking the Camera
+        Camera.main.transform.position = GameManager.singleton.camPosEnd;
     }
 }

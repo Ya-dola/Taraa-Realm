@@ -51,12 +51,14 @@ public class GameManager : MonoBehaviour
     public float thrwBrokenSoundVolume;
 
     [Header("Effects")]
-    public GameObject thrwTrailPrefab;
     public float cameraShakeAmount;
     public float cameraShakeAmountStep { get; set; }
     public float cameraShakeDuration;
     public float cameraShakeDurationStep { get; set; }
     public float cameraShakeStepFactor;
+    public float effectPsDestDelay;
+    public GameObject ConfettiPs;
+    public GameObject ExplosionPs;
 
     [Header("Camera")]
     public Vector3 camPosStart;
@@ -392,30 +394,6 @@ public class GameManager : MonoBehaviour
         if (camFovTransitionDone && camPosTransitionDone && camRotTransitionDone)
             if (!GameStarted)
                 StartGame();
-    }
-
-    // To Shake the Camera
-    public void ShakeCamera(float camShakeDuration, float camShakeAmt)
-    {
-        // To Stop Any Existing Camera Shakes
-        StopAllCoroutines();
-        StartCoroutine(ShakeCameraIEnum(camShakeDuration, camShakeAmt));
-    }
-
-    private IEnumerator ShakeCameraIEnum(float camShakeDuration, float camShakeAmt)
-    {
-        while (camShakeDuration > 0)
-        {
-            Camera.main.transform.position = camPosEnd + (Random.insideUnitSphere * camShakeAmt);
-
-            camShakeDuration -= cameraShakeDurationStep;
-            camShakeAmt -= cameraShakeAmountStep;
-
-            yield return null;
-        }
-
-        // To reset the Camera Position after Shaking the Camera
-        Camera.main.transform.position = camPosEnd;
     }
 
     // Player Movement

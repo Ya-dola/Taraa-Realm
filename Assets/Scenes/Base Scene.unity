@@ -1105,10 +1105,11 @@ MonoBehaviour:
   thrwLaunchDelay: 1
   thrwYPos: 1.5
   thrwSpeed: 10
+  thrwPlayerHitDelay: 0.25
   thrwBrokenDelay: 2
-  thrwExplosionForce: 350
-  thrwExplosionRadius: 6
-  thrwExplosionUpwardsMod: 4
+  thrwExplosionForce: 400
+  thrwExplosionRadius: 2
+  thrwExplosionUpwardsMod: 0.275
   thrwBrokenSound: {fileID: 0}
   thrwBrokenSoundVolume: 0.125
   cameraShakeAmount: 0.125

@@ -29,10 +29,9 @@ public class ThrowableController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // If the throwable collides with the edge
+        // If the Throwable collides with the Edge
         if (collision.gameObject.tag == "Edge")
         {
-
             GameObject destEffect = Instantiate(GameManager.singleton.ConfettiPs, transform.position, Quaternion.identity);
 
             Destroy(gameObject);
@@ -43,9 +42,39 @@ public class ThrowableController : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        // If the Throwable Collides with the Player
         if (collider.gameObject.tag == "Player")
         {
+            // To Shake the Camera
             ShakeCamera(GameManager.singleton.cameraShakeDuration, GameManager.singleton.cameraShakeAmount);
+
+            // To Play the Explosion Effect 
+            GameObject destEffect = Instantiate(GameManager.singleton.ExplosionPs, transform.position, Quaternion.identity);
+
+            // To Stop and Disable the Throwable
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+
+            // To show the Broken Throwable
+            GameObject thrwBroken = Instantiate(GameManager.singleton.thrwBrokenPrefab, transform.position, Quaternion.identity);
+
+            for (int i = 0; i < thrwBroken.transform.childCount; i++)
+            {
+                // Assigning the Destructable's Material to the Broken Parts of the Destructable
+                thrwBroken.transform.GetChild(i).GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+
+                // Giving an Upwards Explosive force to the Broken Parts
+                thrwBroken.transform.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(GameManager.singleton.thrwExplosionForce,
+                                                                                             transform.position,
+                                                                                             GameManager.singleton.thrwExplosionRadius,
+                                                                                             GameManager.singleton.thrwExplosionUpwardsMod);
+            }
+
+            // Destroy the Game Objects
+            Destroy(gameObject, GameManager.singleton.thrwPlayerHitDelay);
+            Destroy(destEffect, GameManager.singleton.effectPsDestDelay);
+            Destroy(thrwBroken, GameManager.singleton.thrwBrokenDelay);
         }
     }
 

@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public float thrwYPos;
     [Range(0, 48f)]
     public float thrwSpeed;
+    public float thrwPlayerHitDelay;
     public float thrwBrokenDelay;
     public float thrwExplosionForce;
     public float thrwExplosionRadius;

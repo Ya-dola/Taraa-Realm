@@ -34,9 +34,8 @@ public class GameManager : MonoBehaviour
     public int enemiesCounter;
 
     [Header("Throwables")]
-    public GameObject[] thrwPrefabs;
-    public GameObject[] thrwBrokenPrefabs;
-    private int thrwCounter;
+    public GameObject thrwPrefab;
+    public GameObject thrwBrokenPrefab;
     public float thrwInstantiateDelay;
     public float thrwLaunchDelay;
     public float thrwYPos;
@@ -148,8 +147,6 @@ public class GameManager : MonoBehaviour
 
         Enemies = new List<GameObject>();
         enemiesCounter = 0;
-
-        thrwCounter = 0;
 
         // To load the next scene
         LoadNextScene();
@@ -442,7 +439,7 @@ public class GameManager : MonoBehaviour
         SetPlayerMoveLeft(true);
     }
 
-    // Enemy Logic
+    // Throwable Logic
 
     private IEnumerator InstantiateThrowable()
     {
@@ -454,17 +451,17 @@ public class GameManager : MonoBehaviour
             if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
                 continue;
 
-            // To determine the throwable to launch
-            thrwCounter = Random.Range(0, thrwPrefabs.Length);
-
             // To determine which enemy will lauch the determined throwable
             enemiesCounter = Random.Range(0, Enemies.Count);
 
-            GameObject throwable = Instantiate(thrwPrefabs[thrwCounter],
+            GameObject throwable = Instantiate(thrwPrefab,
                                                new Vector3(Enemies[enemiesCounter].transform.position.x,
                                                thrwYPos,
                                                Enemies[enemiesCounter].transform.position.z),
                                                Quaternion.identity);
+
+            // To assign the Material of the Chosen Enemy to the Throwable
+            throwable.GetComponent<Renderer>().material = Enemies[enemiesCounter].GetComponentInChildren<Renderer>().material;
         }
     }
 

@@ -1099,14 +1099,8 @@ MonoBehaviour:
   playerPosRotMoveAcptableRange: 0.01
   enemyRotMoveSpeed: 1
   enemiesCounter: 0
-  thrwPrefabs:
-  - {fileID: 4012815534946657042, guid: 172b9ac0b9bc4284d990f57878f44425, type: 3}
-  - {fileID: 6124860386230749567, guid: b7792013d7686fc4ab860e4f04804586, type: 3}
-  - {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
-  thrwBrokenPrefabs:
-  - {fileID: 32341695068172768, guid: 39925ccca03c1c44c8f28cf6cc0e37b9, type: 3}
-  - {fileID: 32341695068172768, guid: 79f76bf9ddf9ad34dbef7a79d7584520, type: 3}
-  - {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
+  thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
+  thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
   thrwInstantiateDelay: 1.5
   thrwLaunchDelay: 1
   thrwYPos: 1.5

@@ -1150,6 +1150,7 @@ MonoBehaviour:
   downButton: {fileID: 463622242}
   rightButton: {fileID: 559894577}
   leftButton: {fileID: 211503441}
+  debugCanvas: {fileID: 1068649444030187168}
   debugText: {fileID: 1068649444401521830}
 --- !u!4 &401093375
 Transform:
@@ -6103,7 +6104,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 7
+  m_AdditionalShaderChannelsFlag: 31
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

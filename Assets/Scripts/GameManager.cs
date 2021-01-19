@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
     public Button leftButton;
 
     [Header("Debug")]
+    public GameObject debugCanvas;
     public TextMeshProUGUI debugText;
 
     void Awake()
@@ -163,12 +164,17 @@ public class GameManager : MonoBehaviour
                             "playerMoveUp: " + playerMoveUp + "\n" +
                             "playerMoveDown: " + playerMoveDown + "\n" +
                             "playerMoveLeft: " + playerMoveLeft + "\n" +
-                            "playerMoveRight: " + playerMoveRight + "\n"
+                            "playerMoveRight: " + playerMoveRight + "\n" +
+                            "Enemies Count: " + Enemies.Count + "\n"
                             // "Scene Counter: " + sceneCounter + "\n" +
                             // "Next Scene Int: " + nextSceneInt + "\n" +
                             // "Temp Next Scene Int: " + tempNextSceneInt + "\n" +
                             // "Current Scene Int: " + currentSceneInt + "\n" +
                             ;
+
+        // To Show the Debug Canvas
+        if (Input.GetKeyUp(KeyCode.Keypad0))
+            debugCanvas.SetActive(!debugCanvas.activeSelf);
 
         // To Start the Game when the Screen is Tapped
         if (Input.GetMouseButton(0) || Input.GetKeyUp(KeyCode.Keypad5))
@@ -435,7 +441,7 @@ public class GameManager : MonoBehaviour
 
     private void InitialiseGameObjectsRef()
     {
-        // TODO - Check to ensure player is being reset for each level
+        // TODO - Check to ensure player and enemies are being reset for each level when progressing from level to another
         // Player = null;
         // Enemies.Clear();
 

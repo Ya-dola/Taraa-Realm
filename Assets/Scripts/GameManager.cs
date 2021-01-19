@@ -30,13 +30,18 @@ public class GameManager : MonoBehaviour
     [Range(0, 48f)]
     public float enemyRotMoveSpeed;
     public List<GameObject> Enemies { get; private set; }
-    private int enemiesCounter;
+    [HideInInspector]
+    public int enemiesCounter;
 
     [Header("Throwables")]
     public GameObject[] thrwPrefabs;
+    public GameObject[] thrwBrokenPrefabs;
+    private int thrwCounter;
+    public float thrwInstantiateDelay;
+    public float thrwLaunchDelay;
+    public float thrwYPos;
     [Range(0, 48f)]
     public float thrwSpeed;
-    public GameObject[] thrwBrokenPrefabs;
     public float thrwBrokenDelay;
     public float thrwExplosionForce;
     public float thrwExplosionRadius;
@@ -79,7 +84,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Materials")]
     public Material playerMaterial;
-    public Material playerEffectsMaterial;
     public Color playerColor { get; set; }
     public Material[] enemyMaterials;
     public Material[] enemyEffectsMaterials;
@@ -145,8 +149,13 @@ public class GameManager : MonoBehaviour
         Enemies = new List<GameObject>();
         enemiesCounter = 0;
 
+        thrwCounter = 0;
+
         // To load the next scene
         LoadNextScene();
+
+        // To Lauch a Throwable at the Player
+        StartCoroutine(InstantiateThrowable());
     }
 
     // Update is called once per frame
@@ -435,7 +444,29 @@ public class GameManager : MonoBehaviour
 
     // Enemy Logic
 
+    private IEnumerator InstantiateThrowable()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(thrwInstantiateDelay);
 
+            // To work only when the Game has started or has not ended or is not paused
+            if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
+                continue;
+
+            // To determine the throwable to launch
+            thrwCounter = Random.Range(0, thrwPrefabs.Length);
+
+            // To determine which enemy will lauch the determined throwable
+            enemiesCounter = Random.Range(0, Enemies.Count);
+
+            GameObject throwable = Instantiate(thrwPrefabs[thrwCounter],
+                                               new Vector3(Enemies[enemiesCounter].transform.position.x,
+                                               thrwYPos,
+                                               Enemies[enemiesCounter].transform.position.z),
+                                               Quaternion.identity);
+        }
+    }
 
     // Game Play Objects
 

@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!54 &8792307155147898313
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092163983855397683}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 2
 --- !u!135 &1940221512666211156
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11,8 +27,20 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.45
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3396841741690584226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092163983855397683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f92a52636b0cf04cb93b1f7a4d591e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7937929799842820666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -64,6 +92,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
       propertyPath: m_Name
       value: WheelBall Variant
@@ -75,6 +115,14 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
       propertyPath: m_TagString
       value: Throwable
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 687145877830984350, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2987298645994513347, guid: 74cbada03bcd41d49acec56746acf71e, type: 3}
       propertyPath: m_LocalRotation.x

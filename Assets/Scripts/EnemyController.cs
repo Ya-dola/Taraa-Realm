@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     {
         transform.rotation = Quaternion.Slerp(transform.rotation,
                                               Quaternion.LookRotation(
-                                                    GameManager.singleton.Player.gameObject.transform.position -
+                                                    GameManager.singleton.Player.transform.position -
                                                             transform.position),
                                               GameManager.singleton.enemyRotMoveSpeed * Time.fixedDeltaTime);
     }

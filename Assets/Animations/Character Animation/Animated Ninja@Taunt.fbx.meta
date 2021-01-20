@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 92eb5465200ab1f46b0b23c73bbe942f
+guid: 05e596b6bff837045836f07b4da7aaaa
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: T-Pose
+    second: mixamo.com
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -33,36 +33,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: T-Pose
-      takeName: mixamo.com
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -104,27 +75,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 73b301d215154fb498311fc1df20b0ee
-  - 2ca50aa6bf7075b429982678059a7f1f
-  - db0b98a4de4f11f4aba5e741cf9be6f8
-  - fad2e9d8875353b469d49a214a891343
-  - 39f1c43a5111f994590a9827cb15b469
-  - 4a0b59d3a0e6373429852b830da1819c
-  - 08b8d9a9f1f49cf469542e5f4fef9e6b
-  - 02c4f1d4fc22a224ca59f9e363ce0415
-  - 5c6a9729183fbb34b8ab3455ab85214a
-  - 9f75f4cceaaebf84fbd0c0e1b4965c3b
-  - 1c36aa3b35abea649b3ff15c451a3597
-  - 30e18fd08e513ca46b14f43ff0ee869d
-  - 09bd108074fd38b48a8b3b7bf50648b0
-  - 02be72168a7de8340b639dce42b0e97b
-  - 569c2672198d713499de54decfc01057
-  - 99bd4e1ae80d21d47a50adf300c54e3e
-  - e0758a3250550d545803d90d5040878c
-  - 05e596b6bff837045836f07b4da7aaaa
-  - 706573f44f4955f43bc36f175db29d0a
-  - 312e4f38baa788f429d5e9dff9acf814
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

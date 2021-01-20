@@ -61,6 +61,7 @@ public class ThrowableController : MonoBehaviour
 
             // To show the Broken Throwable
             GameObject thrwBroken = Instantiate(GameManager.singleton.thrwBrokenPrefab, transform.position, Quaternion.identity);
+            thrwBroken.transform.localScale = gameObject.transform.localScale;
 
             for (int i = 0; i < thrwBroken.transform.childCount; i++)
             {

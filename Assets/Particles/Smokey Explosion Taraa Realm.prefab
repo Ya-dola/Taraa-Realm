@@ -38936,7 +38936,7 @@ GameObject:
   - component: {fileID: 2312591318274358132}
   - component: {fileID: 2312591318274358135}
   m_Layer: 0
-  m_Name: SmokeyExplosion Taraa Realm
+  m_Name: Smokey Explosion Taraa Realm
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -38951,7 +38951,7 @@ Transform:
   m_GameObject: {fileID: 2312591318274358134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.025, y: 0.025, z: 0.025}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 2312591317811908601}
   - {fileID: 2312591318041002043}

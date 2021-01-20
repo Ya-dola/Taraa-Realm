@@ -54,6 +54,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character Launch PS
       objectReference: {fileID: 0}
+    - target: {fileID: 2499992258024248036, guid: ca363d8b0c8038944b9e1db20145d96f, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2499992258024248041, guid: ca363d8b0c8038944b9e1db20145d96f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -115,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 2499992258024248036, guid: ca363d8b0c8038944b9e1db20145d96f, type: 3}
       propertyPath: m_Name
       value: White Launch PS
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499992258024248036, guid: ca363d8b0c8038944b9e1db20145d96f, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2499992258024248041, guid: ca363d8b0c8038944b9e1db20145d96f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -222,6 +230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trail Effects
       objectReference: {fileID: 0}
+    - target: {fileID: 7887986001787867717, guid: ee3dbc5f7cd2c8540b18b98ea43ffa45, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3dbc5f7cd2c8540b18b98ea43ffa45, type: 3}
 --- !u!1001 &7231890422953973889
@@ -297,7 +309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 14c6772e06cc8ad49afcc801a053e201, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14c6772e06cc8ad49afcc801a053e201, type: 3}

@@ -10,7 +10,8 @@ public class ThrowableController : MonoBehaviour
 
     void Awake()
     {
-
+        // To determine the size of the throwable
+        SetThrwScaleSize();
     }
 
     // Start is called before the first frame update
@@ -26,7 +27,6 @@ public class ThrowableController : MonoBehaviour
         // To work only when the Game has started or has not ended or is not paused
         if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
             return;
-
 
     }
 
@@ -109,6 +109,11 @@ public class ThrowableController : MonoBehaviour
         // To Launch the Particle Systems when the Throwable is launched
         whiteLaunchPs.Play();
         charLaunchPs.Play();
+
+        // The Delay Between Switching the Layer the Throwable belongs to to one that collide with the Edges
+        yield return new WaitForSeconds(GameManager.singleton.thrwLaunchLayerDelay);
+
+        gameObject.layer = LayerMask.NameToLayer("Thrw");
     }
 
     // To assign the Material of the Trial Effect for the Throwable
@@ -130,6 +135,25 @@ public class ThrowableController : MonoBehaviour
             charLaunchPs.GetComponent<ParticleSystemRenderer>().trailMaterial = GameManager.singleton.enemyMaterials[matIndex];
             charLaunchPsColor.startColor = GameManager.singleton.enemyMaterials[matIndex].color;
         }
+    }
+
+    // To determine the size of the throwable
+    private void SetThrwScaleSize()
+    {
+        var chance = Random.Range(0f, 1f);
+
+        if (chance >= GameManager.singleton.thrwSizeRange[1])
+            gameObject.transform.localScale = new Vector3(GameManager.singleton.thrwSizeScale[2],
+                                                          GameManager.singleton.thrwSizeScale[2],
+                                                          GameManager.singleton.thrwSizeScale[2]);
+        else if (chance >= GameManager.singleton.thrwSizeRange[0])
+            gameObject.transform.localScale = new Vector3(GameManager.singleton.thrwSizeScale[1],
+                                                          GameManager.singleton.thrwSizeScale[1],
+                                                          GameManager.singleton.thrwSizeScale[1]);
+        else
+            gameObject.transform.localScale = new Vector3(GameManager.singleton.thrwSizeScale[0],
+                                                          GameManager.singleton.thrwSizeScale[0],
+                                                          GameManager.singleton.thrwSizeScale[0]);
     }
 
     // To Shake the Camera

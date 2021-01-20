@@ -1103,7 +1103,15 @@ MonoBehaviour:
   thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
   thrwInstantiateDelay: 1.5
   thrwLaunchDelay: 1
+  thrwLaunchLayerDelay: 1
   thrwYPos: 1.5
+  thrwSizeScale:
+  - 0.75
+  - 1.25
+  - 2.25
+  thrwSizeRange:
+  - 0.5
+  - 0.94
   thrwSpeed: 10
   thrwPlayerHitDelay: 0.25
   thrwBrokenDelay: 2

@@ -38,7 +38,10 @@ public class GameManager : MonoBehaviour
     public GameObject thrwBrokenPrefab;
     public float thrwInstantiateDelay;
     public float thrwLaunchDelay;
+    public float thrwLaunchLayerDelay;
     public float thrwYPos;
+    public float[] thrwSizeScale;
+    public float[] thrwSizeRange;
     [Range(0, 48f)]
     public float thrwSpeed;
     public float thrwPlayerHitDelay;
@@ -364,7 +367,7 @@ public class GameManager : MonoBehaviour
         // Camera POS Transition before Starting the Game
         if (camStartPosTransition)
         {
-            // To reposition the Disc behind the Player when Caught
+            // To reposition the Camera Positon as the Game Starts
             Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position,
                                                           camPosEnd,
                                                           camPosTransitionSpeed * Time.fixedDeltaTime);
@@ -379,7 +382,7 @@ public class GameManager : MonoBehaviour
         // Camera ROT Transition before Starting the Game
         if (camStartRotTransition)
         {
-            // To reposition the Disc behind the Player when Caught
+            // To reposition the Camera Rotation as the Game Starts
             Camera.main.transform.rotation = Quaternion.Slerp(Camera.main.transform.rotation,
                                                               Quaternion.Euler(camRotXEnd, 0, 0),
                                                               camRotTransitionSpeed * Time.fixedDeltaTime);
@@ -391,6 +394,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        // To Start the Game once the transitions have finished
         if (camFovTransitionDone && camPosTransitionDone && camRotTransitionDone)
             if (!GameStarted)
                 StartGame();

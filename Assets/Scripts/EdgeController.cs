@@ -17,6 +17,5 @@ public class EdgeController : MonoBehaviour
         if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
             return;
 
-
     }
 }

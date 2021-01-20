@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     public float effectPsDestDelay;
     public GameObject ConfettiPs;
     public GameObject ExplosionPs;
+    public float launchPsSpeed;
 
     [Header("Camera")]
     public Vector3 camPosStart;
@@ -86,10 +87,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Materials")]
     public Material playerMaterial;
-    public Color playerColor { get; set; }
     public Material[] enemyMaterials;
     public Material[] enemyEffectsMaterials;
-    public Color enemyColor { get; set; }
 
     [Header("Level Management")]
     public string levelSceneName;

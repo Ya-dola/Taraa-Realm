@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ThrowableController : MonoBehaviour
 {
+    [Header("Particle Systems")]
+    public ParticleSystem whiteLaunchPs;
+    public ParticleSystem charLaunchPs;
 
     void Awake()
     {
@@ -87,17 +90,32 @@ public class ThrowableController : MonoBehaviour
         var launchDir = Vector3.Normalize(GameManager.singleton.Player.transform.position -
                                             GameManager.singleton.Enemies[GameManager.singleton.enemiesCounter].transform.position);
 
+        // To move the Particles in the direction that the disc is launched in
+        var whiteLaunchPsForce = whiteLaunchPs.forceOverLifetime;
+        var charLaunchPsForce = charLaunchPs.forceOverLifetime;
+
+        whiteLaunchPsForce.x = launchDir.x * GameManager.singleton.launchPsSpeed;
+        whiteLaunchPsForce.z = launchDir.z * GameManager.singleton.launchPsSpeed;
+
+        charLaunchPsForce.x = launchDir.x * GameManager.singleton.launchPsSpeed;
+        charLaunchPsForce.z = launchDir.z * GameManager.singleton.launchPsSpeed;
+
         // The Delay Between Showing the Throwable to the Player and Launching it
         yield return new WaitForSeconds(GameManager.singleton.thrwLaunchDelay);
 
         // To Launch the throwable in the direction of the player
         gameObject.GetComponent<Rigidbody>().velocity = launchDir * GameManager.singleton.thrwSpeed;
+
+        // To Launch the Particle Systems when the Throwable is launched
+        whiteLaunchPs.Play();
+        charLaunchPs.Play();
     }
 
     // To assign the Material of the Trial Effect for the Throwable
     private void GetThrwTrailEffectMat()
     {
         var matIndex = -1;
+        var charLaunchPsColor = charLaunchPs.main;
 
         for (int i = 0; i < GameManager.singleton.enemyMaterials.Length; i++)
             if (gameObject.GetComponent<Renderer>().material.name.Replace(" (Instance)", "") ==
@@ -105,7 +123,13 @@ public class ThrowableController : MonoBehaviour
                 matIndex = i;
 
         if (matIndex != -1)
+        {
             gameObject.GetComponentInChildren<TrailRenderer>().material = GameManager.singleton.enemyEffectsMaterials[matIndex];
+
+            // To set the color of the trail for the Character Launch Particles
+            charLaunchPs.GetComponent<ParticleSystemRenderer>().trailMaterial = GameManager.singleton.enemyMaterials[matIndex];
+            charLaunchPsColor.startColor = GameManager.singleton.enemyMaterials[matIndex].color;
+        }
     }
 
     // To Shake the Camera

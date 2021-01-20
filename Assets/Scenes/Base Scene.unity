@@ -1118,6 +1118,7 @@ MonoBehaviour:
   effectPsDestDelay: 1
   ConfettiPs: {fileID: 3302442364004722511, guid: f0eb7802b355cb74ea216cf2a29fc77e, type: 3}
   ExplosionPs: {fileID: 2312591318274358134, guid: 4ed46d98b0226264fa45e570791475ce, type: 3}
+  launchPsSpeed: 30
   camPosStart: {x: 0.5, y: 25, z: -7}
   camPosEnd: {x: 0.5, y: 25, z: -12.5}
   camRotXStart: 76

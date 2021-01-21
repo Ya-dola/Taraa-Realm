@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float playerPosMoveSpeed;
     [Range(0, 48f)]
     public float playerRotMoveSpeed;
+    public float playerMoveFactor;
     public float playerPosRotMoveAcptableRange;
     public bool playerMove { get; private set; }
     public bool playerMoveUp { get; private set; }

@@ -1093,9 +1093,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f2ca0570d3fca4584d7de3ad28cdde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStartingPos: {x: 0, y: 0.6, z: 0}
+  playerStartingPos: {x: 0, y: 1, z: 0}
   playerPosMoveSpeed: 4
   playerRotMoveSpeed: 2
+  playerMoveFactor: 1
   playerPosRotMoveAcptableRange: 0.01
   enemyRotMoveSpeed: 1
   enemiesCounter: 0

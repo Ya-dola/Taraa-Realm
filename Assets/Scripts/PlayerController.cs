@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerPosLast;
     private Vector3 playerPosMoveTo;
     private Quaternion playerRotMoveTo;
+    private bool moveAnimPlayed;
 
     void Awake()
     {
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        moveAnimPlayed = false;
     }
 
     // Fixed Update used mainly for Physics Calculations
@@ -85,8 +86,16 @@ public class PlayerController : MonoBehaviour
         // if (playerAnimator.GetBool("DiscLaunched") && !GameManager.singleton.PlayerDiscCaught)
         //     playerAnimator.SetBool("DiscLaunched", false);
 
-        // if (Input.GetKeyUp(KeyCode.Mouse0))
-        //     playerAnimator.SetBool("CharacterMoving", false);
+        if (GameManager.singleton.playerMove && !moveAnimPlayed)
+        {
+            playerAnimator.SetBool("CharacterMoving", true);
+            moveAnimPlayed = true;
+        }
+        else
+            playerAnimator.SetBool("CharacterMoving", false);
+
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Character Moving"))
+            playerAnimator.SetBool("CharacterMoving", false);
     }
 
     // To Move and Rotate the Player
@@ -97,7 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.z += 1;
+            playerPosMoveTo.z += GameManager.singleton.playerMoveFactor;
 
             playerRotMoveTo = Quaternion.Euler(0, 0, 0);
 
@@ -110,9 +119,9 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.z -= 1;
+            playerPosMoveTo.z -= GameManager.singleton.playerMoveFactor;
 
-            playerRotMoveTo = Quaternion.Euler(0, 180, 0);
+            playerRotMoveTo = Quaternion.Euler(0, 180f, 0);
 
             GameManager.singleton.SetPlayerMoveDown(false);
             GameManager.singleton.SetPlayerMove(true);
@@ -123,9 +132,9 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.x += 1;
+            playerPosMoveTo.x += GameManager.singleton.playerMoveFactor;
 
-            playerRotMoveTo = Quaternion.Euler(0, 90, 0);
+            playerRotMoveTo = Quaternion.Euler(0, 90f, 0);
 
             GameManager.singleton.SetPlayerMoveRight(false);
             GameManager.singleton.SetPlayerMove(true);
@@ -136,9 +145,9 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.x -= 1;
+            playerPosMoveTo.x -= GameManager.singleton.playerMoveFactor;
 
-            playerRotMoveTo = Quaternion.Euler(0, -90, 0);
+            playerRotMoveTo = Quaternion.Euler(0, -90f, 0);
 
             GameManager.singleton.SetPlayerMoveLeft(false);
             GameManager.singleton.SetPlayerMove(true);
@@ -156,11 +165,15 @@ public class PlayerController : MonoBehaviour
                                                   playerRotMoveTo,
                                                   GameManager.singleton.playerRotMoveSpeed * Time.fixedDeltaTime);
 
+            // To Indicate that the Player has finished moving
             if (Vector3.Distance(transform.position, playerPosMoveTo) <
                                     GameManager.singleton.playerPosRotMoveAcptableRange &&
                 transform.rotation.eulerAngles.y - playerRotMoveTo.eulerAngles.y <
                                     GameManager.singleton.playerPosRotMoveAcptableRange)
+            {
                 GameManager.singleton.SetPlayerMove(false);
+                moveAnimPlayed = false;
+            }
         }
     }
 

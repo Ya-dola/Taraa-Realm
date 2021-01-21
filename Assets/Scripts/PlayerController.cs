@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerPosLast;
     private Vector3 playerPosMoveTo;
     private Quaternion playerRotMoveTo;
-    private bool moveAnimPlayed;
 
     void Awake()
     {
@@ -18,7 +17,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveAnimPlayed = false;
+
     }
 
     // Fixed Update used mainly for Physics Calculations
@@ -83,8 +82,9 @@ public class PlayerController : MonoBehaviour
         if (!playerAnimator.GetBool("GameStarted"))
             playerAnimator.SetBool("GameStarted", GameManager.singleton.GameStarted);
 
-        // if (playerAnimator.GetBool("DiscLaunched") && !GameManager.singleton.PlayerDiscCaught)
-        //     playerAnimator.SetBool("DiscLaunched", false);
+        // If the Player Won the Game
+        if (GameManager.singleton.GameWon)
+            playerAnimator.Play("Game Won");
 
         // To Play an Idle Animation
         if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -102,18 +102,32 @@ public class PlayerController : MonoBehaviour
         }
 
         // To Play the Player Movement Animation
-        if (GameManager.singleton.playerMove && !moveAnimPlayed)
+        if (GameManager.singleton.playerMove && !GameManager.singleton.playerMoveAnimPlayed)
         {
             playerAnimator.Play("Character Moving");
             playerAnimator.SetBool("CharacterMoving", true);
-            moveAnimPlayed = true;
+            GameManager.singleton.SetPlayerMoveAnimPlayed(true);
         }
         else
             playerAnimator.SetBool("CharacterMoving", false);
 
-        // To Ensure the Movement Animation Doesnt Play Twice
+        // To Ensure the Movement Animation does not Play Twice
         if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Character Moving"))
             playerAnimator.SetBool("CharacterMoving", false);
+
+        // To Play the Player Falling on Hit Animation
+        if (GameManager.singleton.playerHit)
+        {
+            playerAnimator.Play("Player Hit");
+            playerAnimator.SetBool("CharacterHit", true);
+        }
+
+        // To Ensure the Movement Animation does not Play Twice
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Player Hit"))
+            GameManager.singleton.SetPlayerHit(false);
+
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Standing Up"))
+            playerAnimator.SetBool("CharacterHit", false);
     }
 
     // To Move and Rotate the Player
@@ -190,7 +204,7 @@ public class PlayerController : MonoBehaviour
                                     GameManager.singleton.playerPosRotMoveAcptableRange)
             {
                 GameManager.singleton.SetPlayerMove(false);
-                moveAnimPlayed = false;
+                GameManager.singleton.SetPlayerMoveAnimPlayed(false);
             }
         }
     }
@@ -213,6 +227,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Keypad4))
             GameManager.singleton.leftButton.onClick.Invoke();
         // GameManager.singleton.MovePlayerLeft();
+    }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        // If the Throwable Collides with the Player
+        if (collider.gameObject.tag == "Throwable")
+        {
+            // To Play the Player Falling on Hit Animation
+            GameManager.singleton.SetPlayerHit(true);
+        }
     }
 }

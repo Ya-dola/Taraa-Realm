@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public bool GameStarted { get; private set; }
     public bool GameEnded { get; private set; }
     public bool GamePaused { get; private set; }
+    public bool GameWon { get; private set; }
+    public bool GameLost { get; private set; }
 
     [Header("Player")]
     public Vector3 playerStartingPos;
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
     public bool playerMoveDown { get; private set; }
     public bool playerMoveRight { get; private set; }
     public bool playerMoveLeft { get; private set; }
+    public bool playerMoveAnimPlayed { get; private set; }
+    public bool playerHit { get; private set; }
     public float[] IdleAnimRange;
     public GameObject Player { get; private set; }
 
@@ -503,6 +507,16 @@ public class GameManager : MonoBehaviour
     public void SetPlayerMoveLeft(bool status)
     {
         playerMoveLeft = status;
+    }
+
+    public void SetPlayerMoveAnimPlayed(bool status)
+    {
+        playerMoveAnimPlayed = status;
+    }
+
+    public void SetPlayerHit(bool status)
+    {
+        playerHit = status;
     }
 
     public void SetPlayer(GameObject gameObject)

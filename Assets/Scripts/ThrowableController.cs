@@ -28,6 +28,16 @@ public class ThrowableController : MonoBehaviour
         if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
             return;
 
+        // To destroy the Throwable if the player is recovering
+        if (!GameManager.singleton.playerRecovered)
+        {
+            // To Stop and Disable the Throwable
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+
+            Destroy(gameObject, GameManager.singleton.thrwPlayerHitDelay);
+        }
     }
 
     void OnCollisionEnter(Collision collision)

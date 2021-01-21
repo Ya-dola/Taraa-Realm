@@ -28,8 +28,12 @@ public class GameManager : MonoBehaviour
     public bool playerMoveRight { get; private set; }
     public bool playerMoveLeft { get; private set; }
     public bool playerMoveAnimPlayed { get; private set; }
-    public bool playerHit { get; private set; }
     public float[] IdleAnimRange;
+    public bool playerHit { get; private set; }
+    public bool playerRecovered { get; private set; }
+    public float playerRecoveryTime;
+    public float playerRecoverySpeed;
+    public float playerRecoveryTimeTemp { get; private set; }
     public GameObject Player { get; private set; }
 
     [Header("Enemy")]
@@ -107,6 +111,8 @@ public class GameManager : MonoBehaviour
     [Header("User Interface")]
     public GameObject tapToStyleTMP;
     public TextMeshProUGUI levelText;
+    public GameObject ballCounter;
+    public TextMeshProUGUI ballCounterText;
     public GameObject pauseMenu;
     public GameObject gameWonMenu;
     public GameObject gameLostMenu;
@@ -159,6 +165,8 @@ public class GameManager : MonoBehaviour
         Enemies = new List<GameObject>();
         enemiesCounter = 0;
 
+        playerRecovered = true;
+
         // To load the next scene
         LoadNextScene();
 
@@ -178,11 +186,14 @@ public class GameManager : MonoBehaviour
                             // "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
                             // "Time Scale: " + Time.timeScale + "\n" +
                             "playerMove: " + playerMove + "\n" +
-                            "playerMoveUp: " + playerMoveUp + "\n" +
-                            "playerMoveDown: " + playerMoveDown + "\n" +
-                            "playerMoveLeft: " + playerMoveLeft + "\n" +
-                            "playerMoveRight: " + playerMoveRight + "\n" +
-                            "Enemies Count: " + Enemies.Count + "\n"
+                            "playerHit: " + playerHit + "\n" +
+                            "playerRecovered: " + playerRecovered + "\n" +
+                            "playerRecoveryTimeTemp: " + playerRecoveryTimeTemp + "\n"
+                            // "playerMoveUp: " + playerMoveUp + "\n" +
+                            // "playerMoveDown: " + playerMoveDown + "\n" +
+                            // "playerMoveLeft: " + playerMoveLeft + "\n" +
+                            // "playerMoveRight: " + playerMoveRight + "\n" +
+                            // "Enemies Count: " + Enemies.Count + "\n"
                             // "Scene Counter: " + sceneCounter + "\n" +
                             // "Next Scene Int: " + nextSceneInt + "\n" +
                             // "Temp Next Scene Int: " + tempNextSceneInt + "\n" +
@@ -301,6 +312,22 @@ public class GameManager : MonoBehaviour
             controlButtons.SetActive(true);
             pauseButton.SetActive(true);
             levelText.gameObject.SetActive(true);
+        }
+
+        // To Disable the Control Buttons if the Player is Recovering
+        if (!playerRecovered)
+        {
+            upButton.interactable = false;
+            downButton.interactable = false;
+            rightButton.interactable = false;
+            leftButton.interactable = false;
+        }
+        else
+        {
+            upButton.interactable = true;
+            downButton.interactable = true;
+            rightButton.interactable = true;
+            leftButton.interactable = true;
         }
     }
 
@@ -436,20 +463,24 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(thrwInstantiateDelay);
 
             // To work only when the Game has started or has not ended or is not paused
-            if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
+            if (!GameStarted || GameEnded || GamePaused)
                 continue;
 
-            // To determine which enemy will lauch the determined throwable
-            enemiesCounter = Random.Range(0, Enemies.Count);
+            // To launch only when Player is not Hit
+            if (playerRecovered)
+            {
+                // To determine which enemy will lauch the determined throwable
+                enemiesCounter = Random.Range(0, Enemies.Count);
 
-            GameObject throwable = Instantiate(thrwPrefab,
-                                               new Vector3(Enemies[enemiesCounter].transform.position.x,
-                                               thrwYPos,
-                                               Enemies[enemiesCounter].transform.position.z),
-                                               Quaternion.identity);
+                GameObject throwable = Instantiate(thrwPrefab,
+                                                   new Vector3(Enemies[enemiesCounter].transform.position.x,
+                                                   thrwYPos,
+                                                   Enemies[enemiesCounter].transform.position.z),
+                                                   Quaternion.identity);
 
-            // To assign the Material of the Chosen Enemy to the Throwable
-            throwable.GetComponent<Renderer>().material = Enemies[enemiesCounter].GetComponentInChildren<Renderer>().material;
+                // To assign the Material of the Chosen Enemy to the Throwable
+                throwable.GetComponent<Renderer>().material = Enemies[enemiesCounter].GetComponentInChildren<Renderer>().material;
+            }
         }
     }
 
@@ -517,6 +548,16 @@ public class GameManager : MonoBehaviour
     public void SetPlayerHit(bool status)
     {
         playerHit = status;
+    }
+
+    public void SetPlayerRecovered(bool status)
+    {
+        playerRecovered = status;
+    }
+
+    public void SetPlayerRecoveryTimeTemp(float amount)
+    {
+        playerRecoveryTimeTemp = amount;
     }
 
     public void SetPlayer(GameObject gameObject)

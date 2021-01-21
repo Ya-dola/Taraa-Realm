@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
 
         // To Move the Player Using Keyboard Keys
         PerformPlayerKeyboardMovement();
+
+        // To have a delay for the player to recover
+        PlayerRecovery();
     }
 
     // Late Update used mainly for Camera Calculations and Calculations that need to occur after movement has occured
@@ -229,6 +232,29 @@ public class PlayerController : MonoBehaviour
         // GameManager.singleton.MovePlayerLeft();
     }
 
+    // To have a delay for the player to recover
+    public void PlayerRecovery()
+    {
+        // To only add the recovery delay if it has not started
+        if (!GameManager.singleton.playerRecovered &&
+            GameManager.singleton.playerRecoveryTimeTemp == 0)
+            GameManager.singleton.SetPlayerRecoveryTimeTemp(GameManager.singleton.playerRecoveryTime);
+
+        // To delay the time between Player being hit and continuing the game
+        if (!GameManager.singleton.playerRecovered)
+        {
+            if (GameManager.singleton.playerRecoveryTimeTemp > 0)
+                GameManager.singleton.SetPlayerRecoveryTimeTemp(
+                        GameManager.singleton.playerRecoveryTimeTemp -
+                            (GameManager.singleton.playerRecoverySpeed * Time.fixedDeltaTime));
+            else
+            {
+                GameManager.singleton.SetPlayerRecovered(true);
+                GameManager.singleton.SetPlayerRecoveryTimeTemp(0f);
+            }
+        }
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         // If the Throwable Collides with the Player
@@ -236,6 +262,9 @@ public class PlayerController : MonoBehaviour
         {
             // To Play the Player Falling on Hit Animation
             GameManager.singleton.SetPlayerHit(true);
+
+            // To Indicate that the Player needs to recover
+            GameManager.singleton.SetPlayerRecovered(false);
         }
     }
 }

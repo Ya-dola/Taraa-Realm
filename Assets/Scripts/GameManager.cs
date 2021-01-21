@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public bool playerMoveDown { get; private set; }
     public bool playerMoveRight { get; private set; }
     public bool playerMoveLeft { get; private set; }
+    public float[] IdleAnimRange;
     public GameObject Player { get; private set; }
 
     [Header("Enemy")]

@@ -86,14 +86,32 @@ public class PlayerController : MonoBehaviour
         // if (playerAnimator.GetBool("DiscLaunched") && !GameManager.singleton.PlayerDiscCaught)
         //     playerAnimator.SetBool("DiscLaunched", false);
 
+        // To Play an Idle Animation
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            var idleAnimChance = Random.Range(0f, 1f);
+
+            if (idleAnimChance >= GameManager.singleton.IdleAnimRange[2])
+                playerAnimator.Play("Battle Cry");
+            else if (idleAnimChance >= GameManager.singleton.IdleAnimRange[1])
+                playerAnimator.Play("Hip Hop");
+            else if (idleAnimChance >= GameManager.singleton.IdleAnimRange[0])
+                playerAnimator.Play("Gangnam Style");
+            else
+                playerAnimator.Play("Shuffling");
+        }
+
+        // To Play the Player Movement Animation
         if (GameManager.singleton.playerMove && !moveAnimPlayed)
         {
+            playerAnimator.Play("Character Moving");
             playerAnimator.SetBool("CharacterMoving", true);
             moveAnimPlayed = true;
         }
         else
             playerAnimator.SetBool("CharacterMoving", false);
 
+        // To Ensure the Movement Animation Doesnt Play Twice
         if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Character Moving"))
             playerAnimator.SetBool("CharacterMoving", false);
     }

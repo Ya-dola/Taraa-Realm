@@ -52,7 +52,8 @@ public class GameManager : MonoBehaviour
     public float[] thrwSizeScale;
     public float[] thrwSizeRange;
     [Range(0, 48f)]
-    public float thrwSpeed;
+    public float baseThrwSpeed;
+    public float gameThrwSpeed { get; private set; }
     public float thrwPlayerHitDelay;
     public float thrwBrokenDelay;
     public float thrwExplosionForce;
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour
 
     [Range(0, 1)]
     public float thrwBrokenSoundVolume;
+
+    [Header("Gameplay")]
+    public int baseBallCount;
+    public int levelBallCount { get; private set; }
+    public int gameBallCount { get; private set; }
 
     [Header("Effects")]
     public float cameraShakeAmount;
@@ -184,10 +190,11 @@ public class GameManager : MonoBehaviour
                             // "camStartFovTransition: " + camStartFovTransition + "\n" +
                             // "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
                             // "Time Scale: " + Time.timeScale + "\n" +
-                            "playerMove: " + playerMove + "\n" +
-                            "playerHit: " + playerHit + "\n" +
+                            // "playerMove: " + playerMove + "\n" +
+                            // "playerHit: " + playerHit + "\n" +
                             "playerRecovered: " + playerRecovered + "\n" +
-                            "playerRecoveryTimeTemp: " + playerRecoveryTimeTemp + "\n"
+                            "playerRecoveryTimeTemp: " + playerRecoveryTimeTemp + "\n" +
+                            "gamethrwSpeed: " + gameThrwSpeed + "\n"
                             // "playerMoveUp: " + playerMoveUp + "\n" +
                             // "playerMoveDown: " + playerMoveDown + "\n" +
                             // "playerMoveLeft: " + playerMoveLeft + "\n" +
@@ -215,8 +222,8 @@ public class GameManager : MonoBehaviour
         // To Control the Visibility of some UI Elements
         UiElementsVisibility();
 
-        // To Update the level indicator text with the corresponding level
-        levelText.text = "Level " + sceneCounter;
+        // To Update Gameplay Elements within the Level
+        UpdateGameplayElements();
 
         // TODO - To check if the current level has finished
         // if (!GameEnded)
@@ -228,6 +235,18 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         GameStarted = true;
+
+        // Assigning the Default Game Values
+
+        // Ball Count for Level
+        levelBallCount = baseBallCount + Mathf.RoundToInt(sceneCounter * 0.6f);
+        gameBallCount = levelBallCount;
+
+        // Thrw Speed for Level
+        gameThrwSpeed = baseThrwSpeed;
+
+        // Delay between Spawning Thrws
+        thrwInstantiateDelay = thrwInstantiateDelay - (sceneCounter * 0.2f);
     }
 
     public void PauseOrResumeGame()
@@ -305,12 +324,14 @@ public class GameManager : MonoBehaviour
             controlButtons.SetActive(false);
             pauseButton.SetActive(false);
             levelText.gameObject.SetActive(false);
+            ballCounter.gameObject.SetActive(false);
         }
         else if (GameStarted)
         {
             controlButtons.SetActive(true);
             pauseButton.SetActive(true);
             levelText.gameObject.SetActive(true);
+            ballCounter.gameObject.SetActive(true);
         }
 
         // To Disable the Control Buttons if the Player is Recovering
@@ -328,6 +349,24 @@ public class GameManager : MonoBehaviour
             rightButton.interactable = true;
             leftButton.interactable = true;
         }
+    }
+
+    // To Update Gameplay Elements within the Level
+    private void UpdateGameplayElements()
+    {
+        // To Update the level indicator text with the corresponding level
+        levelText.text = "Level " + sceneCounter;
+
+        // To Update the Ball Counter text with the game ball count
+        ballCounterText.text = "" + gameBallCount;
+
+        // To increase the speed of the Thrwoables when the Remaining Balls Reduces
+        if (gameBallCount > (levelBallCount * 0.5f))
+            gameThrwSpeed = baseThrwSpeed;
+        else if (gameBallCount > (levelBallCount * 0.25f))
+            gameThrwSpeed = baseThrwSpeed * 1.25f;
+        else
+            gameThrwSpeed = baseThrwSpeed * 1.5f;
     }
 
     private void LoadNextScene()
@@ -433,6 +472,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Player Movement
+
     public void MovePlayerUp()
     {
         SetPlayerMoveUp(true);
@@ -562,6 +602,16 @@ public class GameManager : MonoBehaviour
     public void SetEnemiesCounter(int amount)
     {
         enemiesCounter = amount;
+    }
+
+    public void SetGameBallCount(int amount)
+    {
+        gameBallCount = amount;
+    }
+
+    public void SetGamethrwSpeed(float amount)
+    {
+        gameThrwSpeed = amount;
     }
 
     public void SetPlayer(GameObject gameObject)

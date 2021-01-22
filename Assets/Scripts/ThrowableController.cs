@@ -122,13 +122,16 @@ public class ThrowableController : MonoBehaviour
         thrwEnemy.GetComponent<Animator>().SetBool("CharacterThrw", true);
 
         // To Launch the throwable in the direction of the player
-        gameObject.GetComponent<Rigidbody>().velocity = launchDir * GameManager.singleton.thrwSpeed;
+        gameObject.GetComponent<Rigidbody>().velocity = launchDir * GameManager.singleton.gameThrwSpeed;
 
         // To Launch the Particle Systems when the Throwable is launched
         whiteLaunchPs.Play();
         charLaunchPs.Play();
 
-        // The Delay Between Switching the Layer the Throwable belongs to to one that collide with the Edges
+        // To Indicate that a Throwable was launched
+        GameManager.singleton.SetGameBallCount(GameManager.singleton.gameBallCount - 1);
+
+        // The Delay Between Switching the Layer the Throwable belongs to to one that collides with the Edges
         yield return new WaitForSeconds(GameManager.singleton.thrwLaunchLayerDelay);
 
         gameObject.layer = LayerMask.NameToLayer("Thrw");

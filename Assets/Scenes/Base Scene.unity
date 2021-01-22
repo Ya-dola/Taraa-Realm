@@ -1102,10 +1102,13 @@ MonoBehaviour:
   - 0.25
   - 0.5
   - 0.75
-  playerRecoveryTime: 2.6
+  playerRecoveryTime: 2.62
   playerRecoverySpeed: 0.2
   enemyRotMoveSpeed: 1
-  enemiesCounter: 0
+  EnemyIdleAnimRange:
+  - 0.25
+  - 0.5
+  - 0.75
   thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
   thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
   thrwInstantiateDelay: 1.5
@@ -1163,6 +1166,8 @@ MonoBehaviour:
   levelSceneName: Level Scene
   tapToStyleTMP: {fileID: 1068649442500068805}
   levelText: {fileID: 1068649443888799678}
+  ballCounter: {fileID: 1813878254}
+  ballCounterText: {fileID: 1290859843}
   pauseMenu: {fileID: 7044814638119602206}
   gameWonMenu: {fileID: 944269546}
   gameLostMenu: {fileID: 5994262119904839876}
@@ -1172,8 +1177,6 @@ MonoBehaviour:
   downButton: {fileID: 463622242}
   rightButton: {fileID: 559894577}
   leftButton: {fileID: 211503441}
-  ballCounter: {fileID: 1813878254}
-  ballCounterText: {fileID: 1290859843}
   debugCanvas: {fileID: 1068649444030187168}
   debugText: {fileID: 1068649444401521830}
 --- !u!4 &401093375

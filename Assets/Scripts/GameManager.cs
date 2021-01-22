@@ -40,8 +40,7 @@ public class GameManager : MonoBehaviour
     [Range(0, 48f)]
     public float enemyRotMoveSpeed;
     public List<GameObject> Enemies { get; private set; }
-    [HideInInspector]
-    public int enemiesCounter;
+    public int enemiesCounter { get; private set; }
 
     [Header("Throwables")]
     public GameObject thrwPrefab;
@@ -558,6 +557,11 @@ public class GameManager : MonoBehaviour
     public void SetPlayerRecoveryTimeTemp(float amount)
     {
         playerRecoveryTimeTemp = amount;
+    }
+
+    public void SetEnemiesCounter(int amount)
+    {
+        enemiesCounter = amount;
     }
 
     public void SetPlayer(GameObject gameObject)

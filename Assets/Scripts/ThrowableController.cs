@@ -114,6 +114,14 @@ public class ThrowableController : MonoBehaviour
         // The Delay Between Showing the Throwable to the Player and Launching it
         yield return new WaitForSeconds(GameManager.singleton.thrwLaunchDelay);
 
+        // To Play the Enemy Throwing Animation
+        GameManager.singleton.
+            Enemies[GameManager.singleton.enemiesCounter].
+                GetComponent<Animator>().Play("Throw Thrw");
+        GameManager.singleton.
+            Enemies[GameManager.singleton.enemiesCounter].
+                GetComponent<Animator>().SetBool("CharacterThrw", true);
+
         // To Launch the throwable in the direction of the player
         gameObject.GetComponent<Rigidbody>().velocity = launchDir * GameManager.singleton.thrwSpeed;
 

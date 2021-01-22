@@ -97,9 +97,12 @@ public class ThrowableController : MonoBehaviour
         // To assign the Material of the Trial Effect for the Throwable
         GetThrwTrailEffectMat();
 
+        // To be able to identify the enemy which will throw the throwable
+        var thrwEnemy = GameManager.singleton.Enemies[GameManager.singleton.enemiesCounter];
+
         // Direction the throwable will be launched in
-        var launchDir = Vector3.Normalize(GameManager.singleton.Player.transform.position -
-                                            GameManager.singleton.Enemies[GameManager.singleton.enemiesCounter].transform.position);
+        var launchDir = Vector3.Normalize(
+                            GameManager.singleton.Player.transform.position - thrwEnemy.transform.position);
 
         // To move the Particles in the direction that the disc is launched in
         var whiteLaunchPsForce = whiteLaunchPs.forceOverLifetime;
@@ -115,12 +118,8 @@ public class ThrowableController : MonoBehaviour
         yield return new WaitForSeconds(GameManager.singleton.thrwLaunchDelay);
 
         // To Play the Enemy Throwing Animation
-        GameManager.singleton.
-            Enemies[GameManager.singleton.enemiesCounter].
-                GetComponent<Animator>().Play("Throw Thrw");
-        GameManager.singleton.
-            Enemies[GameManager.singleton.enemiesCounter].
-                GetComponent<Animator>().SetBool("CharacterThrw", true);
+        thrwEnemy.GetComponent<Animator>().Play("Throw Thrw");
+        thrwEnemy.GetComponent<Animator>().SetBool("CharacterThrw", true);
 
         // To Launch the throwable in the direction of the player
         gameObject.GetComponent<Rigidbody>().velocity = launchDir * GameManager.singleton.thrwSpeed;

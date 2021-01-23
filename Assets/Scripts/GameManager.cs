@@ -116,12 +116,18 @@ public class GameManager : MonoBehaviour
 
     [Header("User Interface")]
     public GameObject tapToStyleTMP;
-    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI scoreTMP;
     public GameObject ballCounter;
     public TextMeshProUGUI ballCounterText;
     public GameObject pauseMenu;
+    public TextMeshProUGUI pauseLevelTMP;
+    public TextMeshProUGUI pauseScoreTMP;
     public GameObject gameWonMenu;
+    public TextMeshProUGUI gameWonLevelTMP;
+    public TextMeshProUGUI gameWonScoreTMP;
     public GameObject gameLostMenu;
+    public TextMeshProUGUI gameLostLevelTMP;
+    public TextMeshProUGUI gameLostScoreTMP;
     public GameObject pauseButton;
     public GameObject controlButtons;
     public Button upButton;
@@ -251,7 +257,7 @@ public class GameManager : MonoBehaviour
         gameThrwSpeed = baseThrwSpeed;
 
         // Delay between Spawning Thrws
-        gameThrwInstantiateDelay = baseThrwInstantiateDelay - (sceneCounter * 0.2f);
+        gameThrwInstantiateDelay = baseThrwInstantiateDelay - (sceneCounter * 0.1f);
 
         // To Reset Player Position
         playerMove = false;
@@ -347,14 +353,14 @@ public class GameManager : MonoBehaviour
         {
             controlButtons.SetActive(false);
             pauseButton.SetActive(false);
-            levelText.gameObject.SetActive(false);
+            scoreTMP.gameObject.SetActive(false);
             ballCounter.gameObject.SetActive(false);
         }
         else if (GameStarted)
         {
             controlButtons.SetActive(true);
             pauseButton.SetActive(true);
-            levelText.gameObject.SetActive(true);
+            scoreTMP.gameObject.SetActive(true);
             ballCounter.gameObject.SetActive(true);
         }
 
@@ -378,8 +384,20 @@ public class GameManager : MonoBehaviour
     // To Update Gameplay Elements within the Level
     private void UpdateGameplayElements()
     {
-        // To Update the level indicator text with the corresponding level
-        levelText.text = "Level " + sceneCounter;
+        // To Update the Score indicator text with the corresponding score
+        scoreTMP.text = "" + sceneCounter;
+
+        // To Update the Pause Menu indicators
+        pauseLevelTMP.text = "Level " + sceneCounter;
+        pauseScoreTMP.text = "Score: " + sceneCounter;
+
+        // To Update the Game Won Menu indicators
+        gameWonLevelTMP.text = "Level " + sceneCounter;
+        gameWonScoreTMP.text = "Score: " + sceneCounter;
+
+        // To Update the Game Lost Menu indicators
+        gameLostLevelTMP.text = "Level " + sceneCounter;
+        gameWonLevelTMP.text = "Score: " + sceneCounter;
 
         // To Update the Ball Counter text with the game ball count
         ballCounterText.text = "" + gameBallCount;
@@ -553,8 +571,8 @@ public class GameManager : MonoBehaviour
     private void InitialiseGameObjectsRef()
     {
         // To ensure player and enemies are being reset for each level when progressing from level to another
-        // Player = null;
-        // Enemies.Clear();
+        Player = null;
+        Enemies.Clear();
 
         // Setting Up the Player
         if (GameObject.FindGameObjectWithTag("Player") != null)

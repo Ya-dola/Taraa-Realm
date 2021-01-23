@@ -67,6 +67,9 @@ public class ThrowableController : MonoBehaviour
             // To Play the Explosion Effect 
             GameObject destEffect = Instantiate(GameManager.singleton.ExplosionPs, transform.position, Quaternion.identity);
 
+            // To Reduce the Score when the Player is hit
+            GameManager.singleton.SubThrwHitScore();
+
             // To Stop and Disable the Throwable
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             gameObject.GetComponent<MeshRenderer>().enabled = false;

@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
     public int baseBallCount;
     public int levelBallCount { get; private set; }
     public int gameBallCount { get; private set; }
+    public float scoreDetectorRadius;
+    public int dodgeScoreValue;
+    public int dodgeScoreMultiplier;
+    public int hitScoreValue;
+    public int currentScore { get; private set; }
 
     [Header("Effects")]
     public float cameraShakeAmount;
@@ -306,16 +311,17 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        // // To unload the current scene
+        // To Unload the current scene
         SceneManager.UnloadSceneAsync(levelSceneName);
 
-        // To hide the Game Won Menu
+        // To Hide the Game Won Menu
         gameWonMenu.SetActive(false);
 
+        // To Clear the State of the next loaded Game
         GameWon = false;
         GameLost = false;
 
-        // // Display Next Loaded Scene
+        // Display Next Loaded Scene
         LoadNextScene();
     }
 
@@ -385,22 +391,31 @@ public class GameManager : MonoBehaviour
     private void UpdateGameplayElements()
     {
         // To Update the Score indicator text with the corresponding score
-        scoreTMP.text = "" + sceneCounter;
-
-        // To Update the Pause Menu indicators
-        pauseLevelTMP.text = "Level " + sceneCounter;
-        pauseScoreTMP.text = "Score: " + sceneCounter;
-
-        // To Update the Game Won Menu indicators
-        gameWonLevelTMP.text = "Level " + sceneCounter;
-        gameWonScoreTMP.text = "Score: " + sceneCounter;
-
-        // To Update the Game Lost Menu indicators
-        gameLostLevelTMP.text = "Level " + sceneCounter;
-        gameWonLevelTMP.text = "Score: " + sceneCounter;
+        scoreTMP.text = "" + currentScore;
 
         // To Update the Ball Counter text with the game ball count
         ballCounterText.text = "" + gameBallCount;
+
+        // To Update the Pause Menu indicators
+        if (GamePaused)
+        {
+            pauseLevelTMP.text = "Level " + sceneCounter;
+            pauseScoreTMP.text = "Score: " + currentScore;
+        }
+
+        // To Update the Game Won Menu indicators
+        if (GameWon)
+        {
+            gameWonLevelTMP.text = "Level " + sceneCounter;
+            gameWonScoreTMP.text = "Score: " + currentScore;
+        }
+
+        // To Update the Game Lost Menu indicators
+        if (GameLost)
+        {
+            gameLostLevelTMP.text = "Level " + sceneCounter;
+            gameLostScoreTMP.text = "Score: " + currentScore;
+        }
 
         // To increase the speed of the Thrwoables when the Remaining Balls Reduces
         if (gameBallCount > (levelBallCount * 0.5f))
@@ -564,6 +579,21 @@ public class GameManager : MonoBehaviour
                 throwable.GetComponent<Renderer>().material = Enemies[enemiesCounter].GetComponentInChildren<Renderer>().material;
             }
         }
+    }
+
+    public void AddThrwDodgeScore()
+    {
+        currentScore += dodgeScoreValue;
+    }
+
+    public void SubThrwHitScore()
+    {
+        var newScore = currentScore - hitScoreValue;
+
+        if (newScore < 0)
+            currentScore = 0;
+        else
+            currentScore = newScore;
     }
 
     // Game Play Objects

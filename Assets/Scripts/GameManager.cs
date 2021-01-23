@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
     [Header("Throwables")]
     public GameObject thrwPrefab;
     public GameObject thrwBrokenPrefab;
-    public float thrwInstantiateDelay;
+    public float baseThrwInstantiateDelay;
+    public float gameThrwInstantiateDelay { get; private set; }
     public float thrwLaunchDelay;
     public float thrwLaunchLayerDelay;
     public float thrwYPos;
@@ -194,7 +195,8 @@ public class GameManager : MonoBehaviour
                             // "playerHit: " + playerHit + "\n" +
                             "playerRecovered: " + playerRecovered + "\n" +
                             "playerRecoveryTimeTemp: " + playerRecoveryTimeTemp + "\n" +
-                            "gamethrwSpeed: " + gameThrwSpeed + "\n"
+                            "gamethrwSpeed: " + gameThrwSpeed + "\n" +
+                            "gameThrwInstantiateDelay: " + gameThrwInstantiateDelay + "\n"
                             // "playerMoveUp: " + playerMoveUp + "\n" +
                             // "playerMoveDown: " + playerMoveDown + "\n" +
                             // "playerMoveLeft: " + playerMoveLeft + "\n" +
@@ -213,8 +215,8 @@ public class GameManager : MonoBehaviour
         // To Start the Game when the Screen is Tapped
         if (Input.GetMouseButton(0) || Input.GetKeyUp(KeyCode.Keypad5))
             // Signals the Game has started and only runs it once if the game has already started
-            if (!GameManager.singleton.GameStarted)
-                GameManager.singleton.CheckCameraTransitions();
+            if (!GameStarted)
+                CheckCameraTransitions();
 
         // To perform the Camera Transitions
         PerformCameraTransitions();
@@ -224,6 +226,9 @@ public class GameManager : MonoBehaviour
 
         // To Update Gameplay Elements within the Level
         UpdateGameplayElements();
+
+        // To Check if the Current Level Progress
+        CurrentGameProgress();
 
         // TODO - To check if the current level has finished
         // if (!GameEnded)
@@ -246,7 +251,10 @@ public class GameManager : MonoBehaviour
         gameThrwSpeed = baseThrwSpeed;
 
         // Delay between Spawning Thrws
-        thrwInstantiateDelay = thrwInstantiateDelay - (sceneCounter * 0.2f);
+        gameThrwInstantiateDelay = baseThrwInstantiateDelay - (sceneCounter * 0.2f);
+
+        // To Reset Player Position
+        playerMove = false;
     }
 
     public void PauseOrResumeGame()
@@ -266,23 +274,17 @@ public class GameManager : MonoBehaviour
         GameEnded = true;
         GameStarted = false;
 
-        // TODO - Play Player Won Animation
-
         if (gameWon)
         {
+            GameWon = true;
             gameWonMenu.SetActive(true);
-
-            // // To unload the current scene if the game has ended
-            // if (GameEnded)
-            //     SceneManager.UnloadSceneAsync(string.Concat(baseSceneName + " ", currentSceneInt + 1));
-
-            // // Display Next Loaded Scene
-            // LoadNextScene();
+            // StopTime();
         }
         else
         {
+            GameLost = true;
             gameLostMenu.SetActive(true);
-            StopTime();
+            // StopTime();
         }
     }
 
@@ -294,6 +296,21 @@ public class GameManager : MonoBehaviour
     private void StartTime()
     {
         Time.timeScale = 1f;
+    }
+
+    public void NextLevel()
+    {
+        // // To unload the current scene
+        SceneManager.UnloadSceneAsync(levelSceneName);
+
+        // To hide the Game Won Menu
+        gameWonMenu.SetActive(false);
+
+        GameWon = false;
+        GameLost = false;
+
+        // // Display Next Loaded Scene
+        LoadNextScene();
     }
 
     public void RestartGame()
@@ -309,6 +326,13 @@ public class GameManager : MonoBehaviour
         // Debug.Log("Quit the Game !!!");
 
         Application.Quit();
+    }
+
+    // To Check if the Current Level Progress
+    private void CurrentGameProgress()
+    {
+        if (GameStarted && gameBallCount <= 0)
+            EndGame(true);
     }
 
     private void UiElementsVisibility()
@@ -377,6 +401,7 @@ public class GameManager : MonoBehaviour
 
         // To allow the player to play the loaded level/scene
         GameEnded = false;
+        GameStarted = false;
 
         // To Initialise the Game Objects References of Loaded Scene according to their tags
         InitialiseGameObjectsRef();
@@ -499,7 +524,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(thrwInstantiateDelay);
+            yield return new WaitForSeconds(gameThrwInstantiateDelay);
 
             // To work only when the Game has started or has not ended or is not paused
             if (!GameStarted || GameEnded || GamePaused)
@@ -527,7 +552,7 @@ public class GameManager : MonoBehaviour
 
     private void InitialiseGameObjectsRef()
     {
-        // TODO - Check to ensure player and enemies are being reset for each level when progressing from level to another
+        // To ensure player and enemies are being reset for each level when progressing from level to another
         // Player = null;
         // Enemies.Clear();
 
@@ -599,19 +624,9 @@ public class GameManager : MonoBehaviour
         playerRecoveryTimeTemp = amount;
     }
 
-    public void SetEnemiesCounter(int amount)
-    {
-        enemiesCounter = amount;
-    }
-
     public void SetGameBallCount(int amount)
     {
         gameBallCount = amount;
-    }
-
-    public void SetGamethrwSpeed(float amount)
-    {
-        gameThrwSpeed = amount;
     }
 
     public void SetPlayer(GameObject gameObject)

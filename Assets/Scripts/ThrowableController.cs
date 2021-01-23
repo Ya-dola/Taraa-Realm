@@ -25,11 +25,11 @@ public class ThrowableController : MonoBehaviour
     void Update()
     {
         // To work only when the Game has started or has not ended or is not paused
-        if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
-            return;
+        // if (!GameManager.singleton.GameStarted || GameManager.singleton.GameEnded || GameManager.singleton.GamePaused)
+        //     return;
 
-        // To destroy the Throwable if the player is recovering
-        if (!GameManager.singleton.playerRecovered)
+        // To destroy the Throwable if the player is recovering or the game has ended
+        if (!GameManager.singleton.playerRecovered || GameManager.singleton.GameEnded)
         {
             // To Stop and Disable the Throwable
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -50,6 +50,9 @@ public class ThrowableController : MonoBehaviour
             Destroy(gameObject);
 
             Destroy(destEffect, GameManager.singleton.effectPsDestDelay);
+
+            // To Indicate that a Throwable was launched
+            GameManager.singleton.SetGameBallCount(GameManager.singleton.gameBallCount - 1);
         }
     }
 
@@ -127,9 +130,6 @@ public class ThrowableController : MonoBehaviour
         // To Launch the Particle Systems when the Throwable is launched
         whiteLaunchPs.Play();
         charLaunchPs.Play();
-
-        // To Indicate that a Throwable was launched
-        GameManager.singleton.SetGameBallCount(GameManager.singleton.gameBallCount - 1);
 
         // The Delay Between Switching the Layer the Throwable belongs to to one that collides with the Edges
         yield return new WaitForSeconds(GameManager.singleton.thrwLaunchLayerDelay);

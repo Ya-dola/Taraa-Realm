@@ -70,6 +70,9 @@ public class ThrowableController : MonoBehaviour
             // To Reduce the Score when the Player is hit
             GameManager.singleton.SubThrwHitScore();
 
+            // To Reduce the Number of Times the Player can be hit
+            GameManager.singleton.ReduceHitCount();
+
             // To reset the Score Multiplier
             GameManager.singleton.ResetSuccessiveDodgeCounter();
 

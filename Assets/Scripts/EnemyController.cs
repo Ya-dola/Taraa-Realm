@@ -50,6 +50,10 @@ public class EnemyController : MonoBehaviour
         if (GameManager.singleton.GameWon)
             enemyAnimator.Play("Game Won");
 
+        // If the Player Lost the Game
+        if (GameManager.singleton.GameLost)
+            enemyAnimator.Play("Game Lost");
+
         // To Stop the Enemy Throwing Animation
         if (enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Throw Thrw"))
             enemyAnimator.SetBool("CharacterThrw", false);

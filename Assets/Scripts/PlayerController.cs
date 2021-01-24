@@ -90,6 +90,10 @@ public class PlayerController : MonoBehaviour
         if (GameManager.singleton.GameWon)
             playerAnimator.Play("Game Won");
 
+        // If the Player Lost the Game
+        if (GameManager.singleton.GameLost)
+            playerAnimator.Play("Game Lost");
+
         // To Play an Idle Animation
         if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {

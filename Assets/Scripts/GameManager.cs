@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviour
     public float successiveDodgeFactor;
     public float successiveDodgeCounter { get; private set; }
     public int hitScoreValue;
+    public int baseHitCount;
+    public int gameHitCount { get; private set; }
     public int currentScore { get; private set; }
 
     [Header("Effects")]
@@ -142,6 +144,9 @@ public class GameManager : MonoBehaviour
     public Button downButton;
     public Button rightButton;
     public Button leftButton;
+    public GameObject recoveryScreen;
+    public TextMeshProUGUI playerRecoveringTMP;
+    public TextMeshProUGUI hitsRemainingTMP;
 
     [Header("Debug")]
     public GameObject debugCanvas;
@@ -272,6 +277,9 @@ public class GameManager : MonoBehaviour
         // Base Score Per Dodge
         gameDodgeScoreValue = baseDodgeScoreValue;
 
+        // Hits Player can take per Level
+        gameHitCount = baseHitCount + Mathf.RoundToInt(sceneCounter * 0.5f);
+
         // To Reset Player Position
         playerMove = false;
     }
@@ -356,6 +364,9 @@ public class GameManager : MonoBehaviour
     {
         if (GameStarted && gameBallCount <= 0)
             EndGame(true);
+
+        if (GameStarted && gameHitCount <= 0)
+            EndGame(false);
     }
 
     private void UiElementsVisibility()
@@ -372,29 +383,25 @@ public class GameManager : MonoBehaviour
             pauseButton.SetActive(false);
             scoreTMP.gameObject.SetActive(false);
             ballCounter.gameObject.SetActive(false);
+            recoveryScreen.SetActive(false);
         }
         else if (GameStarted)
         {
-            controlButtons.SetActive(true);
             pauseButton.SetActive(true);
             scoreTMP.gameObject.SetActive(true);
             ballCounter.gameObject.SetActive(true);
-        }
 
-        // To Disable the Control Buttons if the Player is Recovering
-        if (!playerRecovered)
-        {
-            upButton.interactable = false;
-            downButton.interactable = false;
-            rightButton.interactable = false;
-            leftButton.interactable = false;
-        }
-        else
-        {
-            upButton.interactable = true;
-            downButton.interactable = true;
-            rightButton.interactable = true;
-            leftButton.interactable = true;
+            // To Hide the Control Buttons and Show the Recovery Screen when the Player is Recovering
+            if (!playerRecovered)
+            {
+                controlButtons.SetActive(false);
+                recoveryScreen.SetActive(true);
+            }
+            else
+            {
+                controlButtons.SetActive(true);
+                recoveryScreen.SetActive(false);
+            }
         }
     }
 
@@ -426,6 +433,16 @@ public class GameManager : MonoBehaviour
         {
             gameLostLevelTMP.text = "Level " + sceneCounter;
             gameLostScoreTMP.text = "Score: " + currentScore;
+        }
+
+        // To Update the Player Recovery Screen
+        if (!playerRecovered)
+        {
+            // To Update the Hits Remaining text with the game hit count
+            hitsRemainingTMP.text = "Hits Remaining \n" + gameHitCount;
+
+            // To Update the Player Recovery Time
+            playerRecoveringTMP.text = "Player Recovering \n" + playerRecoveryTimeTemp.ToString("F2") + "s";
         }
 
         // To increase the speed of the Thrwoables when the Remaining Balls Reduces
@@ -621,6 +638,11 @@ public class GameManager : MonoBehaviour
     public void ApplyDodgeValueMultiplier()
     {
         gameDodgeScoreValue *= dodgeScoreMultiplier;
+    }
+
+    public void ReduceHitCount()
+    {
+        gameHitCount -= 1;
     }
 
     // Game Play Objects

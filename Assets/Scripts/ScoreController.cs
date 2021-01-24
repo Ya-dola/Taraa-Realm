@@ -20,6 +20,14 @@ public class ScoreController : MonoBehaviour
     void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.tag == "Throwable")
+        {
             GameManager.singleton.AddThrwDodgeScore();
+            GameManager.singleton.AddSuccessiveDodgeCounter();
+        }
+
+        // To Add Multiplier to the score every X successive dodges
+        if (GameManager.singleton.successiveDodgeCounter != 0 &&
+            GameManager.singleton.successiveDodgeCounter % GameManager.singleton.successiveDodgeFactor == 0)
+            GameManager.singleton.ApplyDodgeValueMultiplier();
     }
 }

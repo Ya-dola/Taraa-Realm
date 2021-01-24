@@ -1643,7 +1643,7 @@ MonoBehaviour:
   thrwSizeRange:
   - 0.5
   - 0.94
-  baseThrwSpeed: 10
+  baseThrwSpeed: 8
   thrwPlayerHitDelay: 0.25
   thrwBrokenDelay: 2
   thrwExplosionForce: 400
@@ -1651,11 +1651,12 @@ MonoBehaviour:
   thrwExplosionUpwardsMod: 0.275
   thrwBrokenSound: {fileID: 0}
   thrwBrokenSoundVolume: 0.125
-  baseBallCount: 5
-  scoreDetectorRadius: 3
-  dodgeScoreValue: 10
+  baseBallCount: 10
+  scoreDetectorRadius: 3.5
+  baseDodgeScoreValue: 10
   dodgeScoreMultiplier: 2
-  hitScoreValue: 5
+  successiveDodgeFactor: 4
+  hitScoreValue: 20
   cameraShakeAmount: 0.125
   cameraShakeDuration: 0.0625
   cameraShakeStepFactor: 60

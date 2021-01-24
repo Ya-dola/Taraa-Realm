@@ -70,6 +70,9 @@ public class ThrowableController : MonoBehaviour
             // To Reduce the Score when the Player is hit
             GameManager.singleton.SubThrwHitScore();
 
+            // To reset the Score Multiplier
+            GameManager.singleton.ResetSuccessiveDodgeCounter();
+
             // To Stop and Disable the Throwable
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             gameObject.GetComponent<MeshRenderer>().enabled = false;

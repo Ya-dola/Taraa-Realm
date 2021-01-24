@@ -70,8 +70,11 @@ public class GameManager : MonoBehaviour
     public int levelBallCount { get; private set; }
     public int gameBallCount { get; private set; }
     public float scoreDetectorRadius;
-    public int dodgeScoreValue;
+    public int baseDodgeScoreValue;
+    public int gameDodgeScoreValue { get; private set; }
     public int dodgeScoreMultiplier;
+    public float successiveDodgeFactor;
+    public float successiveDodgeCounter { get; private set; }
     public int hitScoreValue;
     public int currentScore { get; private set; }
 
@@ -265,6 +268,9 @@ public class GameManager : MonoBehaviour
 
         // Delay between Spawning Thrws
         gameThrwInstantiateDelay = baseThrwInstantiateDelay - (sceneCounter * 0.1f);
+
+        // Base Score Per Dodge
+        gameDodgeScoreValue = baseDodgeScoreValue;
 
         // To Reset Player Position
         playerMove = false;
@@ -588,7 +594,7 @@ public class GameManager : MonoBehaviour
 
     public void AddThrwDodgeScore()
     {
-        currentScore += dodgeScoreValue;
+        currentScore += gameDodgeScoreValue;
     }
 
     public void SubThrwHitScore()
@@ -599,6 +605,22 @@ public class GameManager : MonoBehaviour
             currentScore = 0;
         else
             currentScore = newScore;
+    }
+
+    public void AddSuccessiveDodgeCounter()
+    {
+        successiveDodgeCounter += 1;
+    }
+
+    public void ResetSuccessiveDodgeCounter()
+    {
+        successiveDodgeCounter = 0;
+        gameDodgeScoreValue = baseDodgeScoreValue;
+    }
+
+    public void ApplyDodgeValueMultiplier()
+    {
+        gameDodgeScoreValue *= dodgeScoreMultiplier;
     }
 
     // Game Play Objects

@@ -1627,7 +1627,7 @@ MonoBehaviour:
   - 0.25
   - 0.5
   - 0.75
-  playerRecoveryTime: 2.62
+  playerRecoveryTime: 1.75
   playerRecoverySpeed: 0.2
   enemyRotMoveSpeed: 1
   thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}

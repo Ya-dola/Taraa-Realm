@@ -184,6 +184,8 @@ public class GameManager : MonoBehaviour
 
         playerRecovered = true;
 
+        currentScore = 0;
+
         // To load the next scene
         LoadNextScene();
 
@@ -320,6 +322,9 @@ public class GameManager : MonoBehaviour
         // To Clear the State of the next loaded Game
         GameWon = false;
         GameLost = false;
+
+        // To Reset the Score for the Level
+        currentScore = 0;
 
         // Display Next Loaded Scene
         LoadNextScene();

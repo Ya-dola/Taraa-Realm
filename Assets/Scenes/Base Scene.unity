@@ -1621,14 +1621,14 @@ MonoBehaviour:
   playerStartingPos: {x: 0.5, y: 1, z: 0}
   playerPosMoveSpeed: 4
   playerRotMoveSpeed: 2
-  playerMoveFactor: 1
+  playerMoveFactor: 1.25
   playerPosRotMoveAcptableRange: 0.05
   IdleAnimRange:
   - 0.25
   - 0.5
   - 0.75
-  playerRecoveryTime: 1.75
-  playerRecoverySpeed: 0.2
+  playerRecoveryTime: 1.5
+  playerRecoverySpeed: 0.25
   enemyRotMoveSpeed: 1
   thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
   thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
@@ -1652,7 +1652,7 @@ MonoBehaviour:
   thrwBrokenSound: {fileID: 8300000, guid: add92fd9eab4aad43a9cf2479e311f74, type: 3}
   thrwBrokenSoundVolume: 0.3
   baseBallCount: 20
-  scoreDetectorRadius: 3.5
+  scoreDetectorRadius: 3.75
   baseDodgeScoreValue: 10
   dodgeScoreMultiplier: 2
   successiveDodgeFactor: 4
@@ -3552,18 +3552,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1017a4f9f338e764abe04fb664f89307, type: 3}
---- !u!1 &863746656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7631385700052191369, guid: 1017a4f9f338e764abe04fb664f89307, type: 3}
+--- !u!114 &863746657 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1053974843714620659, guid: 1017a4f9f338e764abe04fb664f89307, type: 3}
   m_PrefabInstance: {fileID: 863746655}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &863746657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863746656}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 125b7e749b1ff174982b800f1270d3c9, type: 3}
@@ -5526,7 +5520,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _sensitivity: 12
+  _sensitivity: 18
   _continuousDetection: 1
   _swipeDetectionMode: 2
 --- !u!4 &1392256132

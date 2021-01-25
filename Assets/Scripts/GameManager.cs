@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     private AsyncOperation sceneLoader;
 
     [Header("User Interface")]
-    public GameObject tapToStyleTMP;
+    public GameObject startScreen;
     public TextMeshProUGUI scoreTMP;
     public GameObject ballCounter;
     public TextMeshProUGUI ballCounterText;
@@ -371,10 +371,10 @@ public class GameManager : MonoBehaviour
 
     private void UiElementsVisibility()
     {
-        // To Hide the Slide to Move Text if not at the Starting Scene
+        // To Hide the Start Screen if not at the Starting Scene
         if (sceneCounter > 1 || GameStarted ||
             camStartFovTransition || camStartPosTransition || camStartRotTransition)
-            tapToStyleTMP.SetActive(false);
+            startScreen.SetActive(false);
 
         // To Hide the Control Buttons, Pause Button and Level Indicator Text when the Game is Paused, Won or Lost
         if (pauseMenu.activeSelf || gameWonMenu.activeSelf || gameLostMenu.activeSelf)

@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public float[] thrwSizeRange;
     [Range(0, 48f)]
     public float baseThrwSpeed;
+    public float levelThrwSpeed { get; private set; }
     public float gameThrwSpeed { get; private set; }
     public float thrwPlayerHitDelay;
     public float thrwBrokenDelay;
@@ -265,14 +266,15 @@ public class GameManager : MonoBehaviour
         // Assigning the Default Game Values
 
         // Ball Count for Level
-        levelBallCount = baseBallCount + Mathf.RoundToInt(sceneCounter * 0.6f);
+        levelBallCount = baseBallCount + Mathf.RoundToInt(sceneCounter * 4.269f);
         gameBallCount = levelBallCount;
 
         // Thrw Speed for Level
-        gameThrwSpeed = baseThrwSpeed;
+        levelThrwSpeed = baseThrwSpeed + (sceneCounter * 0.125f);
+        gameThrwSpeed = levelThrwSpeed;
 
         // Delay between Spawning Thrws
-        gameThrwInstantiateDelay = baseThrwInstantiateDelay - (sceneCounter * 0.1f);
+        gameThrwInstantiateDelay = baseThrwInstantiateDelay - (sceneCounter * 0.01125f);
 
         // Base Score Per Dodge
         gameDodgeScoreValue = baseDodgeScoreValue;
@@ -449,9 +451,9 @@ public class GameManager : MonoBehaviour
         if (gameBallCount > (levelBallCount * 0.5f))
             gameThrwSpeed = baseThrwSpeed;
         else if (gameBallCount > (levelBallCount * 0.25f))
-            gameThrwSpeed = baseThrwSpeed * 1.25f;
+            gameThrwSpeed = levelThrwSpeed * 1.125f;
         else
-            gameThrwSpeed = baseThrwSpeed * 1.5f;
+            gameThrwSpeed = levelThrwSpeed * 1.25f;
     }
 
     private void LoadNextScene()

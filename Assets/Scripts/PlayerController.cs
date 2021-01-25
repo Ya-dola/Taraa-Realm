@@ -242,20 +242,20 @@ public class PlayerController : MonoBehaviour
     {
         // To only add the recovery delay if it has not started
         if (!GameManager.singleton.playerRecovered &&
-            GameManager.singleton.playerRecoveryTimeTemp == 0)
-            GameManager.singleton.SetPlayerRecoveryTimeTemp(GameManager.singleton.playerRecoveryTime);
+            GameManager.singleton.playerRecoveryTimeTemp == GameManager.singleton.playerRecoveryTime)
+            GameManager.singleton.SetPlayerRecoveryTimeTemp(0f);
 
         // To delay the time between Player being hit and continuing the game
         if (!GameManager.singleton.playerRecovered)
         {
-            if (GameManager.singleton.playerRecoveryTimeTemp > 0)
+            if (GameManager.singleton.playerRecoveryTimeTemp < GameManager.singleton.playerRecoveryTime)
                 GameManager.singleton.SetPlayerRecoveryTimeTemp(
-                        GameManager.singleton.playerRecoveryTimeTemp -
+                        GameManager.singleton.playerRecoveryTimeTemp +
                             (GameManager.singleton.playerRecoverySpeed * Time.fixedDeltaTime));
             else
             {
                 GameManager.singleton.SetPlayerRecovered(true);
-                GameManager.singleton.SetPlayerRecoveryTimeTemp(0f);
+                GameManager.singleton.SetPlayerRecoveryTimeTemp(GameManager.singleton.playerRecoveryTime);
             }
         }
     }

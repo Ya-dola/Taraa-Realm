@@ -442,7 +442,7 @@ public class GameManager : MonoBehaviour
             hitsRemainingTMP.text = "Hits Remaining \n" + gameHitCount;
 
             // To Update the Player Recovery Time
-            playerRecoveringTMP.text = "Player Recovering \n" + playerRecoveryTimeTemp.ToString("F2") + "s";
+            playerRecoveringTMP.text = "Player Recovering \n" + playerRecoveryTimeTemp.ToString("F2") + "%";
         }
 
         // To increase the speed of the Thrwoables when the Remaining Balls Reduces

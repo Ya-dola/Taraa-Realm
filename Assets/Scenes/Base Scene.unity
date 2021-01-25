@@ -1627,8 +1627,8 @@ MonoBehaviour:
   - 0.25
   - 0.5
   - 0.75
-  playerRecoveryTime: 1.5
-  playerRecoverySpeed: 0.25
+  playerRecoveryTime: 1
+  playerRecoverySpeed: 0.125
   enemyRotMoveSpeed: 1
   thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
   thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
@@ -5520,7 +5520,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _sensitivity: 18
+  _sensitivity: 40
   _continuousDetection: 1
   _swipeDetectionMode: 2
 --- !u!4 &1392256132

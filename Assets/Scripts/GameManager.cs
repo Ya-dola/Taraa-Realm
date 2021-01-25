@@ -209,9 +209,10 @@ public class GameManager : MonoBehaviour
                             "Game Started: " + GameStarted + "\n" +
                             // "Game Ended: " + GameEnded + "\n" +
                             // "Game Paused: " + GamePaused + "\n" +
-                            // "camStartPosTransition: " + camStartPosTransition + "\n" +
-                            // "camStartFovTransition: " + camStartFovTransition + "\n" +
-                            // "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
+                            "camStartPosTransition: " + camStartPosTransition + "\n" +
+                            "camStartRotTransition: " + camStartRotTransition + "\n" +
+                            "camStartFovTransition: " + camStartFovTransition + "\n" +
+                            "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
                             // "Time Scale: " + Time.timeScale + "\n" +
                             // "playerMove: " + playerMove + "\n" +
                             // "playerHit: " + playerHit + "\n" +
@@ -496,7 +497,7 @@ public class GameManager : MonoBehaviour
             camStartPosTransition = true;
 
         // Camera ROT Transition before Starting the Game
-        if (Camera.main.transform.rotation.eulerAngles.x == camRotXStart)
+        if (Mathf.RoundToInt(Camera.main.transform.rotation.eulerAngles.x) == Mathf.RoundToInt(camRotXStart))
             camStartRotTransition = true;
 
         // Starting the Game if the Camera has transitioned already

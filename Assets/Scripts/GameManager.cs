@@ -378,7 +378,7 @@ public class GameManager : MonoBehaviour
         // To Hide the Control Buttons, Pause Button and Level Indicator Text when the Game is Paused, Won or Lost
         if (pauseMenu.activeSelf || gameWonMenu.activeSelf || gameLostMenu.activeSelf)
         {
-            controlButtons.SetActive(false);
+            // controlButtons.SetActive(false);
             pauseButton.SetActive(false);
             scoreTMP.gameObject.SetActive(false);
             ballCounter.gameObject.SetActive(false);
@@ -393,12 +393,12 @@ public class GameManager : MonoBehaviour
             // To Hide the Control Buttons and Show the Recovery Screen when the Player is Recovering
             if (!playerRecovered)
             {
-                controlButtons.SetActive(false);
+                // controlButtons.SetActive(false);
                 recoveryScreen.SetActive(true);
             }
             else
             {
-                controlButtons.SetActive(true);
+                // controlButtons.SetActive(true);
                 recoveryScreen.SetActive(false);
             }
         }

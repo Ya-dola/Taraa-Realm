@@ -15,7 +15,7 @@ namespace GG.Infrastructure.Utils.Swipe
         public SwipeListenerEvent OnSwipe;
 
         [SerializeField]
-        private float _sensitivity;
+        private float _sensitivity = 100f;
 
         [SerializeField]
         private bool _continuousDetection;

@@ -1621,7 +1621,7 @@ MonoBehaviour:
   playerStartingPos: {x: 0.5, y: 1, z: 0}
   playerPosMoveSpeed: 4
   playerRotMoveSpeed: 2
-  playerMoveFactor: 1.25
+  playerMoveFactor: 1.75
   playerPosRotMoveAcptableRange: 0.05
   IdleAnimRange:
   - 0.25
@@ -5520,8 +5520,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _sensitivity: 50
-  _continuousDetection: 1
+  _sensitivity: 100
+  _continuousDetection: 0
   _swipeDetectionMode: 2
 --- !u!4 &1392256132
 Transform:

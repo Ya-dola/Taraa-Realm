@@ -97,6 +97,11 @@ public class ThrowableController : MonoBehaviour
                                                                                              GameManager.singleton.thrwExplosionUpwardsMod);
             }
 
+            // Plays the sound between the Camera's position and the Throwab;e's position
+            AudioSource.PlayClipAtPoint(GameManager.singleton.thrwBrokenSound,
+                                        0.9f * Camera.main.transform.position + 0.1f * transform.position,
+                                        GameManager.singleton.thrwBrokenSoundVolume);
+
             // Destroy the Game Objects
             Destroy(gameObject, GameManager.singleton.thrwPlayerHitDelay);
             Destroy(destEffect, GameManager.singleton.effectPsDestDelay);

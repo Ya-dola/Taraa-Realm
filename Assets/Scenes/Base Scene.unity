@@ -1649,8 +1649,8 @@ MonoBehaviour:
   thrwExplosionForce: 400
   thrwExplosionRadius: 2
   thrwExplosionUpwardsMod: 0.275
-  thrwBrokenSound: {fileID: 0}
-  thrwBrokenSoundVolume: 0.125
+  thrwBrokenSound: {fileID: 8300000, guid: add92fd9eab4aad43a9cf2479e311f74, type: 3}
+  thrwBrokenSoundVolume: 0.3
   baseBallCount: 20
   scoreDetectorRadius: 3.5
   baseDodgeScoreValue: 10

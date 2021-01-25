@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour
         // To perform the Camera Transitions
         PerformCameraTransitions();
 
-        // To Control the Visibility of some UI Elements
+        // To Control the Visibility of the UI Elements
         UiElementsVisibility();
 
         // To Update Gameplay Elements within the Level
@@ -251,10 +251,6 @@ public class GameManager : MonoBehaviour
 
         // To Check if the Current Level Progress
         CurrentGameProgress();
-
-        // TODO - To check if the current level has finished
-        // if (!GameEnded)
-        //     LevelProgress();
     }
 
     // Game Management
@@ -371,6 +367,7 @@ public class GameManager : MonoBehaviour
             EndGame(false);
     }
 
+    // To Control the Visibility of the UI Elements
     private void UiElementsVisibility()
     {
         // To Hide the Start Screen if not at the Starting Scene

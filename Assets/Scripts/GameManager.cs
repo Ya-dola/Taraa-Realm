@@ -68,9 +68,12 @@ public class GameManager : MonoBehaviour
     public float thrwExplosionRadius;
     public float thrwExplosionUpwardsMod;
     public AudioClip thrwBrokenSound;
-
     [Range(0, 1)]
     public float thrwBrokenSoundVolume;
+    public AudioClip thrwEdgeCollideSound;
+    [Range(0, 1)]
+    public float thrwEdgeCollideSoundVolume;
+    public float thrwEdgeCollideSoundCounter { get; set; }
 
     [Header("Gameplay")]
     public int baseBallCount;
@@ -207,6 +210,8 @@ public class GameManager : MonoBehaviour
         playerRecovered = true;
 
         currentScore = 0;
+
+        thrwEdgeCollideSoundCounter = 0;
 
         // To load the next scene
         LoadNextScene();

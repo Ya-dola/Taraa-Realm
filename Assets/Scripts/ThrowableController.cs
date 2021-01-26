@@ -54,6 +54,16 @@ public class ThrowableController : MonoBehaviour
 
             Destroy(destEffect, GameManager.singleton.effectPsDestDelay);
 
+            GameManager.singleton.thrwEdgeCollideSoundCounter++;
+
+            if (GameManager.singleton.thrwEdgeCollideSoundCounter % 4 == 0)
+            {
+                // Plays the sound between the Camera's position and the Throwable's position
+                AudioSource.PlayClipAtPoint(GameManager.singleton.thrwEdgeCollideSound,
+                                            0.9f * Camera.main.transform.position + 0.1f * transform.position,
+                                            GameManager.singleton.thrwEdgeCollideSoundVolume);
+            }
+
             // To Indicate that a Throwable was launched
             GameManager.singleton.SetGameBallCount(GameManager.singleton.gameBallCount - 1);
         }
@@ -100,7 +110,7 @@ public class ThrowableController : MonoBehaviour
                                                                                              GameManager.singleton.thrwExplosionUpwardsMod);
             }
 
-            // Plays the sound between the Camera's position and the Throwab;e's position
+            // Plays the sound between the Camera's position and the Throwable's position
             AudioSource.PlayClipAtPoint(GameManager.singleton.thrwBrokenSound,
                                         0.9f * Camera.main.transform.position + 0.1f * transform.position,
                                         GameManager.singleton.thrwBrokenSoundVolume);

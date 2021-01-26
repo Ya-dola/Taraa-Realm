@@ -1635,7 +1635,7 @@ MonoBehaviour:
   enemyRotMoveSpeed: 1
   thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
   thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
-  baseThrwInstantiateDelay: 1.125
+  baseThrwInstantiateDelay: 1.15
   thrwLifespan: 6
   thrwLaunchVariance: 0.4
   thrwLaunchDelay: 0.8
@@ -1656,14 +1656,16 @@ MonoBehaviour:
   thrwExplosionUpwardsMod: 0.275
   thrwBrokenSound: {fileID: 8300000, guid: add92fd9eab4aad43a9cf2479e311f74, type: 3}
   thrwBrokenSoundVolume: 0.3
-  baseBallCount: 30
+  thrwEdgeCollideSound: {fileID: 8300000, guid: bff8f23721cb88a498b869bbd44c99e3, type: 3}
+  thrwEdgeCollideSoundVolume: 0.175
+  baseBallCount: 25
   scoreDetectorRadius: 3.75
   baseDodgeScoreValue: 10
   dodgeScoreMultiplier: 2
   successiveDodgeFactor: 4
-  hitScoreValue: 20
+  hitScoreValue: 250
   baseHitCount: 3
-  bumperForce: 1.75
+  bumperForce: 1.25
   moveBuffPrefab: {fileID: 2849875888656032460, guid: ab223c87e91ee334d99568af44f43a19, type: 3}
   moveDeBuffPrefab: {fileID: 1456789302337513464, guid: fb5bac48ee311b34e97e99e624e28969, type: 3}
   moveModifierSpawnDelay: 8

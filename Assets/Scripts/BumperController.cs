@@ -36,12 +36,12 @@ public class BumperController : MonoBehaviour
         while (Vector3.Distance(
                         GameManager.singleton.Player.transform.position,
                         targetPos) >=
-                            GameManager.singleton.playerPosRotMoveAcptableRange * 3f)
+                            GameManager.singleton.playerPosRotMoveAcptableRange * 4f)
         {
             GameManager.singleton.Player.transform.position =
                 Vector3.Lerp(GameManager.singleton.Player.transform.position,
                             targetPos,
-                            GameManager.singleton.playerPosMoveSpeed * Time.fixedDeltaTime);
+                            GameManager.singleton.playerPosMoveSpeed * 1.5f * Time.fixedDeltaTime);
 
             yield return null;
         }

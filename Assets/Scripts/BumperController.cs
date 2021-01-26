@@ -7,6 +7,12 @@ public class BumperController : MonoBehaviour
     public GameObject bumperFadePrefab;
     public float bumperFadeDelay;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         // If the Player Collides with the Bumper

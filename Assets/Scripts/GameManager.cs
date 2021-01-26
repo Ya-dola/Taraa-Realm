@@ -87,6 +87,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Effects")]
     public float bumperForce;
+    public float bumperYPos;
+    public GameObject moveBuffPrefab;
+    public GameObject moveDeBuffPrefab;
+    public float moveModifierSpawnDelay;
+    public float moveModifierLifespan;
+    public float moveModifierYPos;
     public bool playerModified { get; private set; }
     public float cameraShakeAmount;
     public float cameraShakeAmountStep { get; set; }
@@ -206,6 +212,9 @@ public class GameManager : MonoBehaviour
 
         // To Lauch a Throwable at the Player
         StartCoroutine(InstantiateThrowable());
+
+        // To Spawn a Modifier on the Ground
+        StartCoroutine(SpawnMoveModifiers());
     }
 
     // Update is called once per frame
@@ -271,7 +280,7 @@ public class GameManager : MonoBehaviour
         // Assigning the Default Game Values
 
         // Ball Count for Level
-        levelBallCount = baseBallCount + Mathf.RoundToInt(sceneCounter * 4.269f);
+        levelBallCount = baseBallCount + Mathf.RoundToInt(sceneCounter * 1.24f);
         gameBallCount = levelBallCount;
 
         // Thrw Speed for Level
@@ -580,6 +589,42 @@ public class GameManager : MonoBehaviour
     {
         if (gamePlayerMoveFactor > minPlayerMoveFactor)
             gamePlayerMoveFactor -= playerMoveFactorStep;
+    }
+
+    private IEnumerator SpawnMoveModifiers()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(moveModifierSpawnDelay);
+
+            // To work only when the Game has started or has not ended or is not paused
+            if (!GameStarted || GameEnded || GamePaused)
+                continue;
+
+            var moveModBuffSpawnPos = RandomRealmMoveModPos();
+
+            Instantiate(moveBuffPrefab, moveModBuffSpawnPos, Quaternion.identity);
+
+            var moveModDeBuffSpawnPos = RandomRealmMoveModPos();
+
+            Instantiate(moveDeBuffPrefab, moveModDeBuffSpawnPos, Quaternion.identity);
+        }
+    }
+
+    private Vector3 RandomRealmMoveModPos()
+    {
+        Vector3 randomRealmPos;
+        Vector3 checkBoxHalfSize = new Vector3(0.625f, 0.5f, 0.625f);
+
+        // To Ensure the Modifier does not overlap with another Modifier
+        do
+        {
+            randomRealmPos = new Vector3(Random.Range(leftSideXEdgePos + 2f, rightSideXEdgePos - 2f),
+                                                      moveModifierYPos,
+                                                      Random.Range(-topBotZEdgePos + 2f, topBotZEdgePos - 2f));
+        } while (Physics.CheckBox(randomRealmPos, checkBoxHalfSize, Quaternion.identity, 19));
+
+        return randomRealmPos;
     }
 
     // Player Movement

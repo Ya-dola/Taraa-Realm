@@ -1621,10 +1621,10 @@ MonoBehaviour:
   playerStartingPos: {x: 0.5, y: 1, z: 0}
   playerPosMoveSpeed: 4
   playerRotMoveSpeed: 2
-  basePlayerMoveFactor: 1.75
+  basePlayerMoveFactor: 2
   playerMoveFactorStep: 0.25
-  maxPlayerMoveFactor: 2.5
-  minPlayerMoveFactor: 1.25
+  maxPlayerMoveFactor: 3
+  minPlayerMoveFactor: 1.5
   playerPosRotMoveAcptableRange: 0.05
   IdleAnimRange:
   - 0.25
@@ -1635,7 +1635,7 @@ MonoBehaviour:
   enemyRotMoveSpeed: 1
   thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
   thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
-  baseThrwInstantiateDelay: 20
+  baseThrwInstantiateDelay: 1.125
   thrwLaunchDelay: 1
   thrwLaunchLayerDelay: 1
   thrwYPos: 1.5
@@ -1654,7 +1654,7 @@ MonoBehaviour:
   thrwExplosionUpwardsMod: 0.275
   thrwBrokenSound: {fileID: 8300000, guid: add92fd9eab4aad43a9cf2479e311f74, type: 3}
   thrwBrokenSoundVolume: 0.3
-  baseBallCount: 20
+  baseBallCount: 30
   scoreDetectorRadius: 3.75
   baseDodgeScoreValue: 10
   dodgeScoreMultiplier: 2
@@ -1662,6 +1662,12 @@ MonoBehaviour:
   hitScoreValue: 20
   baseHitCount: 3
   bumperForce: 3.5
+  bumperYPos: 1
+  moveBuffPrefab: {fileID: 2849875888656032460, guid: ab223c87e91ee334d99568af44f43a19, type: 3}
+  moveDeBuffPrefab: {fileID: 1456789302337513464, guid: fb5bac48ee311b34e97e99e624e28969, type: 3}
+  moveModifierSpawnDelay: 8
+  moveModifierLifespan: 18
+  moveModifierYPos: 0.25
   cameraShakeAmount: 0.125
   cameraShakeDuration: 0.0625
   cameraShakeStepFactor: 60

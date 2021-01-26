@@ -7,8 +7,8 @@ public class SwipeManager : MonoBehaviour
 {
     public void SwipeHandler(string id)
     {
-        // To Only allow Player Movement if the Player is not Recovering
-        if (GameManager.singleton.playerRecovered)
+        // To Only allow Player Movement if the Player is not Recovering and not being Modified
+        if (GameManager.singleton.playerRecovered && !GameManager.singleton.playerModified)
         {
             switch (id)
             {

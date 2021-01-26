@@ -1632,7 +1632,7 @@ MonoBehaviour:
   enemyRotMoveSpeed: 1
   thrwPrefab: {fileID: 7538392285297616336, guid: 7db77dc344efdde4291b5d060b0981ef, type: 3}
   thrwBrokenPrefab: {fileID: 32341695068172768, guid: 6460af95a80632b46bac274de5efa79c, type: 3}
-  baseThrwInstantiateDelay: 1.125
+  baseThrwInstantiateDelay: 20
   thrwLaunchDelay: 1
   thrwLaunchLayerDelay: 1
   thrwYPos: 1.5
@@ -1665,6 +1665,7 @@ MonoBehaviour:
   ConfettiPs: {fileID: 3302442364004722511, guid: f0eb7802b355cb74ea216cf2a29fc77e, type: 3}
   ExplosionPs: {fileID: 2312591318274358134, guid: 4ed46d98b0226264fa45e570791475ce, type: 3}
   launchPsSpeed: 30
+  bumperForce: 3.5
   camPosStart: {x: 0.5, y: 25, z: -5}
   camPosEnd: {x: 0.5, y: 25, z: -7}
   camRotXStart: 80
@@ -5445,7 +5446,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _sensitivity: 100
+  _sensitivity: 60
   _continuousDetection: 0
   _swipeDetectionMode: 2
 --- !u!4 &1392256132

@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
     public int currentScore { get; private set; }
 
     [Header("Effects")]
+    public float bumperForce;
+    public bool playerModified { get; private set; }
     public float cameraShakeAmount;
     public float cameraShakeAmountStep { get; set; }
     public float cameraShakeDuration;
@@ -209,13 +211,14 @@ public class GameManager : MonoBehaviour
                             "Game Started: " + GameStarted + "\n" +
                             // "Game Ended: " + GameEnded + "\n" +
                             // "Game Paused: " + GamePaused + "\n" +
-                            "camStartPosTransition: " + camStartPosTransition + "\n" +
-                            "camStartRotTransition: " + camStartRotTransition + "\n" +
-                            "camStartFovTransition: " + camStartFovTransition + "\n" +
-                            "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
+                            // "camStartPosTransition: " + camStartPosTransition + "\n" +
+                            // "camStartRotTransition: " + camStartRotTransition + "\n" +
+                            // "camStartFovTransition: " + camStartFovTransition + "\n" +
+                            // "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
                             // "Time Scale: " + Time.timeScale + "\n" +
-                            // "playerMove: " + playerMove + "\n" +
+                            "playerMove: " + playerMove + "\n" +
                             // "playerHit: " + playerHit + "\n" +
+                            "playerReflected: " + playerModified + "\n" +
                             "playerRecovered: " + playerRecovered + "\n" +
                             "playerRecoveryTimeTemp: " + playerRecoveryTimeTemp + "\n" +
                             "gamethrwSpeed: " + gameThrwSpeed + "\n" +
@@ -714,6 +717,11 @@ public class GameManager : MonoBehaviour
     public void SetPlayerRecovered(bool status)
     {
         playerRecovered = status;
+    }
+
+    public void SetPlayerModified(bool status)
+    {
+        playerModified = status;
     }
 
     public void SetPlayerRecoveryTimeTemp(float amount)

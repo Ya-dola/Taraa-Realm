@@ -1621,7 +1621,10 @@ MonoBehaviour:
   playerStartingPos: {x: 0.5, y: 1, z: 0}
   playerPosMoveSpeed: 4
   playerRotMoveSpeed: 2
-  playerMoveFactor: 1.75
+  basePlayerMoveFactor: 1.75
+  playerMoveFactorStep: 0.25
+  maxPlayerMoveFactor: 2.5
+  minPlayerMoveFactor: 1.25
   playerPosRotMoveAcptableRange: 0.05
   IdleAnimRange:
   - 0.25
@@ -1658,6 +1661,7 @@ MonoBehaviour:
   successiveDodgeFactor: 4
   hitScoreValue: 20
   baseHitCount: 3
+  bumperForce: 3.5
   cameraShakeAmount: 0.125
   cameraShakeDuration: 0.0625
   cameraShakeStepFactor: 60
@@ -1665,7 +1669,6 @@ MonoBehaviour:
   ConfettiPs: {fileID: 3302442364004722511, guid: f0eb7802b355cb74ea216cf2a29fc77e, type: 3}
   ExplosionPs: {fileID: 2312591318274358134, guid: 4ed46d98b0226264fa45e570791475ce, type: 3}
   launchPsSpeed: 30
-  bumperForce: 3.5
   camPosStart: {x: 0.5, y: 25, z: -5}
   camPosEnd: {x: 0.5, y: 25, z: -7}
   camRotXStart: 80

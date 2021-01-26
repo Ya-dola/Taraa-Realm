@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.z += GameManager.singleton.playerMoveFactor;
+            playerPosMoveTo.z += GameManager.singleton.gamePlayerMoveFactor;
 
             playerRotMoveTo = Quaternion.Euler(0, 0, 0);
 
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.z -= GameManager.singleton.playerMoveFactor;
+            playerPosMoveTo.z -= GameManager.singleton.gamePlayerMoveFactor;
 
             playerRotMoveTo = Quaternion.Euler(0, 180f, 0);
 
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.x += GameManager.singleton.playerMoveFactor;
+            playerPosMoveTo.x += GameManager.singleton.gamePlayerMoveFactor;
 
             playerRotMoveTo = Quaternion.Euler(0, 90f, 0);
 
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
         {
             playerPosLast = transform.position;
             playerPosMoveTo = playerPosLast;
-            playerPosMoveTo.x -= GameManager.singleton.playerMoveFactor;
+            playerPosMoveTo.x -= GameManager.singleton.gamePlayerMoveFactor;
 
             playerRotMoveTo = Quaternion.Euler(0, -90f, 0);
 

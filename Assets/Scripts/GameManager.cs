@@ -20,7 +20,11 @@ public class GameManager : MonoBehaviour
     public float playerPosMoveSpeed;
     [Range(0, 48f)]
     public float playerRotMoveSpeed;
-    public float playerMoveFactor;
+    public float basePlayerMoveFactor;
+    public float playerMoveFactorStep;
+    public float maxPlayerMoveFactor;
+    public float minPlayerMoveFactor;
+    public float gamePlayerMoveFactor { get; private set; }
     public float playerPosRotMoveAcptableRange;
     public bool playerMove { get; private set; }
     public bool playerMoveUp { get; private set; }
@@ -217,12 +221,13 @@ public class GameManager : MonoBehaviour
                             // "Cam Rot X: " + Camera.main.transform.rotation.eulerAngles.x + "\n" +
                             // "Time Scale: " + Time.timeScale + "\n" +
                             "playerMove: " + playerMove + "\n" +
+                            "gamePlayerMoveFactor: " + gamePlayerMoveFactor + "\n" +
                             // "playerHit: " + playerHit + "\n" +
-                            "playerReflected: " + playerModified + "\n" +
-                            "playerRecovered: " + playerRecovered + "\n" +
-                            "playerRecoveryTimeTemp: " + playerRecoveryTimeTemp + "\n" +
-                            "gamethrwSpeed: " + gameThrwSpeed + "\n" +
-                            "gameThrwInstantiateDelay: " + gameThrwInstantiateDelay + "\n"
+                            "playerReflected: " + playerModified + "\n"
+                            // "playerRecovered: " + playerRecovered + "\n" +
+                            // "playerRecoveryTimeTemp: " + playerRecoveryTimeTemp + "\n" +
+                            // "gamethrwSpeed: " + gameThrwSpeed + "\n" +
+                            // "gameThrwInstantiateDelay: " + gameThrwInstantiateDelay + "\n"
                             // "playerMoveUp: " + playerMoveUp + "\n" +
                             // "playerMoveDown: " + playerMoveDown + "\n" +
                             // "playerMoveLeft: " + playerMoveLeft + "\n" +
@@ -278,6 +283,9 @@ public class GameManager : MonoBehaviour
 
         // Base Score Per Dodge
         gameDodgeScoreValue = baseDodgeScoreValue;
+
+        // Base Player Move Factor
+        gamePlayerMoveFactor = basePlayerMoveFactor;
 
         // Hits Player can take per Level
         gameHitCount = baseHitCount + Mathf.RoundToInt(sceneCounter * 0.5f);
@@ -558,6 +566,20 @@ public class GameManager : MonoBehaviour
         if (camFovTransitionDone && camPosTransitionDone && camRotTransitionDone)
             if (!GameStarted)
                 StartGame();
+    }
+
+    // Modifiers
+
+    public void BuffPlayerMoveFactor()
+    {
+        if (gamePlayerMoveFactor < maxPlayerMoveFactor)
+            gamePlayerMoveFactor += playerMoveFactorStep;
+    }
+
+    public void DeBuffPlayerMoveFactor()
+    {
+        if (gamePlayerMoveFactor > minPlayerMoveFactor)
+            gamePlayerMoveFactor -= playerMoveFactorStep;
     }
 
     // Player Movement

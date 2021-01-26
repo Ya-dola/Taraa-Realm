@@ -4048,7 +4048,7 @@ Transform:
   m_GameObject: {fileID: 358556060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 1, z: -5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 652872285}
   m_RootOrder: 0
@@ -4086,7 +4086,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 41c29fe69809bfb4a8ed5419b0f0affd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4128,6 +4128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3026bd4287bbe424c88f934462b25888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bumperFadePrefab: {fileID: 2746448923647264606, guid: 3520e10cac635f4428924cd41ec07fc1, type: 3}
+  bumperFadeDelay: 0.5
 --- !u!54 &358556066
 Rigidbody:
   m_ObjectHideFlags: 0

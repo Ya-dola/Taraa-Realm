@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BumperController : MonoBehaviour
 {
+    public GameObject bumperFadePrefab;
+    public float bumperFadeDelay;
+
     void OnTriggerEnter(Collider collider)
     {
         // If the Player Collides with the Bumper
@@ -12,12 +15,14 @@ public class BumperController : MonoBehaviour
             // To Stop the existing Player Movement
             GameManager.singleton.SetPlayerMove(false);
 
+            ShowBumperFadeEffect();
+
+            // To Reflect the Player
             var dirReflection = transform.position - collider.transform.position;
 
             StopAllCoroutines();
             GameManager.singleton.SetPlayerModified(false);
             StartCoroutine(ReflectPlayer(dirReflection.normalized * GameManager.singleton.bumperForce));
-
         }
     }
 
@@ -43,5 +48,15 @@ public class BumperController : MonoBehaviour
 
         // To Allow Swipe Movement once the Player has been Reflected
         GameManager.singleton.SetPlayerModified(false);
+    }
+
+    // To show the Bumper Fade Effect
+    private void ShowBumperFadeEffect()
+    {
+        GameObject bumperFade = Instantiate(bumperFadePrefab, transform.position, transform.rotation);
+
+        bumperFade.GetComponent<Animator>().Play("Bumper Fade Animation");
+
+        Destroy(bumperFade, bumperFadeDelay);
     }
 }

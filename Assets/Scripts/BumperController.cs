@@ -7,16 +7,10 @@ public class BumperController : MonoBehaviour
     public GameObject bumperFadePrefab;
     public float bumperFadeDelay;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     void OnTriggerEnter(Collider collider)
     {
         // If the Player Collides with the Bumper
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Player" && !GameManager.singleton.playerModified)
         {
             // To Stop the existing Player Movement
             GameManager.singleton.SetPlayerMove(false);
@@ -42,7 +36,7 @@ public class BumperController : MonoBehaviour
         while (Vector3.Distance(
                         GameManager.singleton.Player.transform.position,
                         targetPos) >=
-                            GameManager.singleton.playerPosRotMoveAcptableRange)
+                            GameManager.singleton.playerPosRotMoveAcptableRange * 2f)
         {
             GameManager.singleton.Player.transform.position =
                 Vector3.Lerp(GameManager.singleton.Player.transform.position,

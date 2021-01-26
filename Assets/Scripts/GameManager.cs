@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Effects")]
     public float bumperForce;
-    public float bumperYPos;
     public GameObject moveBuffPrefab;
     public GameObject moveDeBuffPrefab;
     public float moveModifierSpawnDelay;

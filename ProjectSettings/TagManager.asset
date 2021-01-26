@@ -8,6 +8,7 @@ TagManager:
   - Throwable
   - Edge
   - Throwable Broken
+  - Bumper
   layers:
   - Default
   - TransparentFX

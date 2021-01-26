@@ -1661,8 +1661,7 @@ MonoBehaviour:
   successiveDodgeFactor: 4
   hitScoreValue: 20
   baseHitCount: 3
-  bumperForce: 3.5
-  bumperYPos: 1
+  bumperForce: 2.5
   moveBuffPrefab: {fileID: 2849875888656032460, guid: ab223c87e91ee334d99568af44f43a19, type: 3}
   moveDeBuffPrefab: {fileID: 1456789302337513464, guid: fb5bac48ee311b34e97e99e624e28969, type: 3}
   moveModifierSpawnDelay: 8

@@ -19,6 +19,9 @@ public class ThrowableController : MonoBehaviour
     {
         // To Launch the Throwable after a Delay
         StartCoroutine(LaunchThrowable());
+
+        // To Ensure all Throwables eventually get destroyed
+        Destroy(gameObject, GameManager.singleton.thrwLifespan);
     }
 
     // Update is called once per frame
@@ -119,7 +122,17 @@ public class ThrowableController : MonoBehaviour
 
         // Direction the throwable will be launched in
         var launchDir = Vector3.Normalize(
-                            GameManager.singleton.Player.transform.position - thrwEnemy.transform.position);
+                               GameManager.singleton.Player.transform.position - thrwEnemy.transform.position);
+
+        // To Randomize the Direction of the Throwable
+        if (Random.Range(0f, 1f) < 0.25f)
+        {
+            launchDir = new Vector3(launchDir.x + Random.Range(-GameManager.singleton.thrwLaunchVariance,
+                                                                GameManager.singleton.thrwLaunchVariance),
+                                    launchDir.y,
+                                    launchDir.z + Random.Range(-GameManager.singleton.thrwLaunchVariance,
+                                                                GameManager.singleton.thrwLaunchVariance)).normalized;
+        }
 
         // To move the Particles in the direction that the disc is launched in
         var whiteLaunchPsForce = whiteLaunchPs.forceOverLifetime;

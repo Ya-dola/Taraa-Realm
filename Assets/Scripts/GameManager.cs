@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
     public GameObject thrwBrokenPrefab;
     public float baseThrwInstantiateDelay;
     public float gameThrwInstantiateDelay { get; private set; }
+    public float thrwLifespan;
+    public float thrwLaunchVariance;
     public float thrwLaunchDelay;
     public float thrwLaunchLayerDelay;
     public float thrwYPos;

@@ -1658,7 +1658,7 @@ MonoBehaviour:
   thrwBrokenSoundVolume: 0.3
   thrwEdgeCollideSound: {fileID: 8300000, guid: bff8f23721cb88a498b869bbd44c99e3, type: 3}
   thrwEdgeCollideSoundVolume: 0.175
-  baseBallCount: 25
+  baseBallCount: 8
   scoreDetectorRadius: 3.75
   baseDodgeScoreValue: 10
   dodgeScoreMultiplier: 2
@@ -3807,7 +3807,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.002447496, g: 0.40462488, b: 0.5188679, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.58971524, b: 0.7924528, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

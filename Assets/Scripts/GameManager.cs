@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(InstantiateThrowable());
 
         // To Spawn a Modifier on the Ground
-        StartCoroutine(SpawnMoveModifiers());
+        // StartCoroutine(SpawnMoveModifiers());
     }
 
     // Update is called once per frame
